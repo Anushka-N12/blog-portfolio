@@ -1,0 +1,37 @@
+---
+title: "Voice Conversion"
+publishedAt: "2025-01-20"
+summary: "Convert the voice in songs to anyone you want!"
+images:
+  - "/images/projects/sonicfusion.png"
+link: "https://github.com/Anushka-N12/sonic-fusion-matlab"
+---
+
+## Overview
+
+SonicFusion employs a combination of signal processing techniques and deep learning to 
+generate any song in any voice. We first run the input song through an algorithm to separate 
+it into vocals & music, and then feed those vocals into our trained model to output the vocals 
+in the new voice. The separation is done based on the concept of repetition in music vs 
+variation in human voices, and implemented using MATLAB. The 
+isolated vocals are then sent into the so-vits-svc model that has been trained on a specific 
+voice. This innovative approach holds promise for diverse applications, ranging from audio 
+editing to immersive entertainment experiences.
+
+## Key Features
+
+- **Seperation**: One major difference between singing voice and music is that 
+the music always has repeating period, whereas vocals have much less repeating period. 
+Leveraging this fact, we derived an algorithm on MATLAB to attain the repeating period from 
+a song and separate that from the mixture signal. Involves STFT, autocorrelation, etc.
+- **Voice conversion**:  This involved collecting a 
+comprehensive dataset of vocal recordings, running silence removal algorithms on it and 
+utilizing it to train a neural network, enabling it to learn the nuances and characteristics of 
+the voice with remarkable fidelity. We then 
+synthesized the isolated vocals, generating a version of the song as if it were sung by the collected voice themselves. 
+
+## Technologies Used
+
+- **MATLAB**: For separation of vocals and background music, and silence removal for the 
+dataset.
+- **Python**: so-vits-svc model repo used the pytorch framework.

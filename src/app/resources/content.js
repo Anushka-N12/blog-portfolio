@@ -1,24 +1,24 @@
 import { InlineCode } from "@/once-ui/components";
 
 const person = {
-  firstName: "Selene",
-  lastName: "Yu",
+  firstName: "Anushka",
+  lastName: "Narsima",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Design Engineer",
+  role: "AI Engineer",
   avatar: "/images/avatar.jpg",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  location: "Asia/Dubai", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: [], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
+  title: <>Reach out to me for collaboration or help!</>,
   description: (
     <>
-      I occasionally write about design, technology, and share thoughts on the intersection of
-      creativity and engineering.
+      I often participate w groups in hackathons, CTFs & other tech contests.
+      I'm also always enthusiastic to learn more, so share thoughts on my projects, or just chat!
     </>
   ),
 };
@@ -29,22 +29,22 @@ const social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system/nextjs-starter",
+    link: "https://github.com/Anushka-N12",
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/anushka-narsima-a-00729124b/",
   },
-  {
-    name: "X",
-    icon: "x",
-    link: "",
-  },
+  // {
+  //   name: "X",
+  //   icon: "x",
+  //   link: "",
+  // },
   {
     name: "Email",
     icon: "email",
-    link: "mailto:example@gmail.com",
+    link: "mailto:anushka.narsima@gmail.com",
   },
 ];
 
@@ -52,11 +52,11 @@ const home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Design engineer and builder</>,
+  headline: <>AI Engineer</>,
   subline: (
     <>
-      I'm Selene, a design engineer at <InlineCode>FLY</InlineCode>, where I craft intuitive
-      <br /> user experiences. After hours, I build my own projects.
+      I'm Anushka, a final year computer systems engineering at <InlineCode>Middlesex University</InlineCode>,
+      <br /> building AI-based projects that serve a purpose.
     </>
   ),
 };
@@ -73,7 +73,7 @@ const about = {
     display: true,
   },
   calendar: {
-    display: true,
+    display: false,
     link: "https://cal.com",
   },
   intro: {
@@ -81,9 +81,9 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        Anushka is an engineering student aspiring to be an AI engineer with a passion for transforming complex challenges
+        into simple, innovative solutions. Her work spans models dealing with tables, image & audio data, and implementations
+        into various use-cases, learning the convergence of math and technology.
       </>
     ),
   },
@@ -92,42 +92,49 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Headstarter AI",
+        timeframe: "July 2024 - Sept 2024",
+        role: "Software Engineering Fellow",
         achievements: [
-          <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
-          </>,
-          <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
-          </>,
+          "Developed full-stack web applications with NextJS, MongoDB, Firebase, & OpenAI APIs."
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Apps AiT",
+        timeframe: "June 2024 - Sept 2024",
+        role: "ML Engineer Intern",
         achievements: [
-          <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
-          </>,
-          <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
-          </>,
+          "Developed Computer Vision models using TensorFlow and implemented chatbots with LLMs & RAG.",
+          "Configured and managed a Linux server hosting AI models."
+        ],
+        images: [],
+      },
+      {
+        company: "Smallcap.ai",
+        timeframe: "June 2024 - August 2024",
+        role: "AI Lead",
+        achievements: [
+          "Led the development of Web3 token analysis models, integrating quantitative and qualitative methods.",
+          "Scraped crypto data using BeautifulSoup & Selenium."
+        ],
+        images: [],
+      },
+      {
+        company: "Infosys Springboard",
+        timeframe: "June 2024 - July 2024",
+        role: "AI Intern",
+        achievements: [
+          "Integrated Deepface recognition with PostgreSQL and automated report creation & scheduling."
+        ],
+        images: [],
+      },
+      {
+        company: "Google Developers Student Club MDX",
+        timeframe: "2022 - 2023",
+        role: "AI Lead",
+        achievements: [
+          "Organized talks and demonstrations to introduce students to AI & other tech domains."
         ],
         images: [],
       },
@@ -135,16 +142,16 @@ const about = {
   },
   studies: {
     display: true, // set to false to hide this section
-    title: "Studies",
+    title: "Education",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
-      },
-      {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
-      },
+        name: "Middlesex University",
+        description: <>Computer Systems Engineering</>,
+      }//,
+      // {
+      //   name: "Build the Future",
+      //   description: <>Studied online marketing and personal branding.</>,
+      // },
     ],
   },
   technical: {
@@ -152,44 +159,40 @@ const about = {
     title: "Technical skills",
     skills: [
       {
-        title: "Figma",
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
+        title: "TensorFlow",
+        description: <>Developed highly accurate CV modelswith TF, now learning intermediate topics like customisation.</>,
         // optional: leave the array empty if you don't want to display images
         images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
         ],
       },
       {
-        title: "Next.js",
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
+        title: "Python",
+        description: <>Building advanced projects in python for 4+ years, using various libraries & APIs.</>,
         // optional: leave the array empty if you don't want to display images
         images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
         ],
       },
+      {
+        title: "Web/App Interfaces",
+        description: <>Built basic web & android apps that connect to backend ie. data/models. </>,
+        // optional: leave the array empty if you don't want to display images
+        images: [
+        ],
+      },
+      {
+        title: "Cloud Computing",
+        description: <>Used mainly GCP services for APIs, storage & deployment.</>,
+        // optional: leave the array empty if you don't want to display images
+        images: [
+        ],
+      }
     ],
   },
 };
 
 const blog = {
-  label: "Blog",
-  title: "Writing about design and tech...",
+  label: "Project Blog",
+  title: "Weekly updates of the final project",
   description: `Read what ${person.name} has been up to recently`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route
@@ -198,8 +201,8 @@ const blog = {
 const work = {
   label: "Work",
   title: "My projects",
-  description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
+  description: `AI projects by ${person.name}`,
+  // Create new project pages by adding a new .mdx file to app/work/projects
   // All projects will be listed on the /home and /work routes
 };
 

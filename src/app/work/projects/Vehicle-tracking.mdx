@@ -1,0 +1,33 @@
+---
+title: "Vehicle Tracking"
+publishedAt: "2025-01-20"
+summary: "System for the police to track criminal vehicles through automated CCTV scanning"
+images:
+  - "/images/projects/project-01/val_batch1_pred.jpg"
+link: "https://github.com/Anushka-N12/server-vision-guard"
+---
+
+## Overview
+
+VisionGuard is a system that automatically navigates through CCTV cameras across locations, 
+and aims to eliminate the need for manual scrutiny of extensive video recordings by 
+employing cutting-edge technology to automate the navigation through CCTV camera feeds. 
+Levaraging advanced artificial intelligence & computer vision algorithms, and given a license 
+plate number along with last known location & time, the proposed system will meticulously 
+analyse video streams or navigate through cameras in real-time to identify & follow the 
+security threat as far as possible. 
+
+## Key Features
+
+- **Adaptable Navigation Algorithm**: It processes maps in the form of a matrix, or nested 
+arrays, marking spots with cameras. The the rows & columns adjacent to the given location is checked, expanding the radius in each iteration. This 
+algorithm was developed to be adaptable to any size of matrix.  
+- **License Plate Detection**: The YOLO model was trained on custom annotated vehicle data.
+- **OCR**: GCP's Vision API was used for accurate OCR of the license plate. 
+
+## Technologies Used
+
+- **Flutter**: For the desktop app interface.
+- **Python**: Flask for back-end server.
+- **Railway**: For deployment of the server. 
+- **ESP32**: Cameras with MB connector boards are used to show the recordings & navigation.
