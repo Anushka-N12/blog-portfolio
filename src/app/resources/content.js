@@ -55,7 +55,7 @@ const home = {
   headline: <>AI Engineer</>,
   subline: (
     <>
-      I'm Anushka, a final year computer systems engineering at <InlineCode>Middlesex University</InlineCode>,
+      I'm Anushka, a final year computer systems engineering student at <InlineCode>Middlesex University</InlineCode>,
       <br /> building AI-based projects that serve a purpose.
     </>
   ),
