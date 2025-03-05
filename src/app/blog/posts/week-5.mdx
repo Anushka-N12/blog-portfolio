@@ -24,11 +24,12 @@ Prototyping Techniques:
 5. Virtual Prototyping - Simulating system behavior to minimize costs.
 
 Some Testing & Feedback options mentioned:
-Usability Testing - Evaluates functionality, usability, and user experience.
-Expert Testing - Involves UX experts and domain specialists to provide feedback.
-Importance of Feedback - Continuous feedback helps refine prototypes and improve the final product.
+* Usability Testing - Evaluates functionality, usability, and user experience.
+* Expert Testing - Involves UX experts and domain specialists to provide feedback.
+* Importance of Feedback - Continuous feedback helps refine prototypes and improve the final product.
 
-## Summary
+## Key Takeaways
+
 Prototyping is essential for bringing ideas to life, testing concepts, and improving designs.
 The choice of prototyping technique (lo-fi to hi-fi) depends on the project's goals, technology, and resources.
 Tools and methods vary, from simple sketches to advanced simulations and coded prototypes.
@@ -36,9 +37,21 @@ Testing and feedback are critical for refining prototypes and ensuring the final
 
 ## This week's work
 
-Although medical applications of computer vision are impactful, I didn't feel like I had anything to add to it.
-For most publically available datasets, more advanced solutions that what I've learnt to build have been made. 
-I went through many papers for diseases like Alziemer's, different cancers, Parkinsons, etc.
+I started this week's search with an intention is the project being impactful. I narrowed down to wildlife conservation.
+Among the different species, I found that bees in particular are essential is maintaining life on Earth.
+One of the processes of conservation itself involved physically relocating bees to specific locations where their popolation is low.
+This required the knowledge of how many of which subspecies of bees are in which location. This is where I could place a monitoring system.
 
+The implementation would require classification of bee subspecies with images, which I have worked on before.
+To add on to this, I intend to implement techniques in preprocessing to efficiently process continuous frames.
+The main part of my proposal was the use of a class of neural networks called Spiking Neural Networks.
+The more common Artificial NNs ran data thorugh the whole of its architecture to output a result. It has proved to be revolutionary in various areas, from computer vision to natural language processing.
+But the boom of ANNs came with the demand for exponential compute power. In comparison, SNNs more closely modelled the human brain - our brains do not run data through every single neuron to output a result, only some parts of it depending on the task at hand.
+Similarly, SNNs dynamically produces 'spikes' in its neurons, meaning only some computation in the architecture will take place for a given input. This would drastically reduce the compute power and electricity required for running them.
+Is this use-case, edge devices with cameras need to be exposed to observe its environment for long amounts of time, and they cannot be recharged constantly, so this method was more suitable.
+I learnt about the concept, as well as the frameworks used to implement them. SNNs were usually supported by neuromorphic hardware, so I planned to implement the mechanisms onto an FPGA.
 
+This is the first-cut proposal that I submitted - [Spike](https://docs.google.com/document/d/1Rlf51nyLFMphXvswXiHSH5fpzD1gSeEr/edit?usp=drive_link&ouid=100640676487683067455&rtpof=true&sd=true).
 
+Some papers & videos I went through:
+* 

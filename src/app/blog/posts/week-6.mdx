@@ -97,22 +97,22 @@ My previous proposal isn't going to work since a major part of it can't be imple
 so I've still been looking for ideas. I'm looking at reinforcment learning applications, swarm robotics, multi-agent systems, and other techniques & areas that sound interesting to me. 
 
 I found a very cool concept while looking - promoting carpooling, by [rewarding High-Occupancy Vehicles with dynamic Traffic Light Control](https://engineering.berkeley.edu/news/2024/06/using-ai-to-get-people-out-of-their-cars-and-into-hovs/). 
-The whole experiment is simulated in an open-source software called SUMO, Simulation for Urban Mobility.  It reminded me of last year's very successful car=pooling solution developed by our seniors. 
+The whole experiment is simulated in an open-source software called SUMO, Simulation for Urban Mobility.  It reminded me of last year's very successful carpooling solution developed by our seniors. 
 The professors also mentioned that the resultsnot only benefited those who carpooled, but even those in private vehicles in the surroundings!
-I checked SUMO and came across another simulator that claimed to be much faster, so I noted it down in case I incorporate traffic simulation: [CityFlow] (https://cityflow.readthedocs.io/en/latest/start.html).
+I checked SUMO and came across another simulator that claimed to be much faster, so I noted it down in case I incorporate traffic simulation: [CityFlow](https://cityflow.readthedocs.io/en/latest/start.html).
 
 The main paper that caught my interest was one that uses reinforcment learning to dynamically set speed limits at different times & points on a read, supporting continous traffic flow. Paper - Traffic Flow Optimisation: A Reinforcement Learning Approach, 2016, [https://www.sciencedirect.com/science/article/pii/S0952197616000038]
-I had seen a video about continous traffic flow a few weeks prior, so this helped me understand the impact of this project - The Simple Solution To Traffic, [https://www.youtube.com/watch?v=iHzzSao6ypE&pp=ygUQdHJhZmZpYyBzb2x1dGlvbg%3D%3D]
-I had a look at the data required for applying this technique myself, and checked about the mentioned data & tools, like this video - How to Create a Network and Simulation in SUMO Using OpenStreetMap, [https://www.youtube.com/watch?v=wZycufsTEGU]
-I went on the open data website provided by the government of the UAE, Bayanat, but did not find the type of data required. I has mostly accident data, with just year & Emirate fields. A few had coordinates, but I needed traffic flow at different points of a road. Site - https://bayanat.ae/en/
-But I did find a paid distributor that I can consider, other than going for public datasets of another country. Site - Tomo, [https://www.tomtom.com/traffic-index/dubai-traffic/]
-I found an implementation of a similar concept with a different approach - Soft Actor-Critic for Variable Speed Limit Control, [https://github.com/juanwulu/sac_vsl?tab=readme-ov-file]
+I had seen a video about continous traffic flow a few weeks prior, so this helped me understand the impact of this project - [The Simple Solution To Traffic](https://www.youtube.com/watch?v=iHzzSao6ypE&pp=ygUQdHJhZmZpYyBzb2x1dGlvbg%3D%3D).
+I had a look at the data required for applying this technique myself, and checked about the mentioned data & tools, like this video - [How to Create a Network and Simulation in SUMO Using OpenStreetMap](https://www.youtube.com/watch?v=wZycufsTEGU).
+I went on the open data website provided by the government of the UAE, Bayanat, but did not find the type of data required. I has mostly accident data, with just year & Emirate fields. A few had coordinates, but I needed traffic flow at different points of a road. Site - [Bayanat](https://bayanat.ae/en/).
+But I did find a paid distributor that I can consider, other than going for public datasets of another country. Site - [Tomo](https://www.tomtom.com/traffic-index/dubai-traffic/)
+I found an implementation of a similar concept with a different approach - [Soft Actor-Critic for Variable Speed Limit Control](https://github.com/juanwulu/sac_vsl?tab=readme-ov-file).
 I will proceed to dive into this technique in depth & start collecting data if my supervisor thinks it is good enough, so I messaged her to fix a meeting.  
 
 Some other papers & sources I went through:
 
-* Multi-Agent Reinforcement Learning: A Review of Challenges and Applications, 2021, [https://www.mdpi.com/2076-3417/11/11/4948]
-* Geospatial Data in Transportation & Route Planning UAE, [https://u.ae/en/information-and-services/transportation/geospatial-data-in-transportation]
-* What are the top urban planning software tools for simulating traffic flow in cities?, [https://www.linkedin.com/advice/0/what-top-urban-planning-software-tools-simulating-0nenc]
-* 20 Ways AI is Advancing Carpooling and Ridesharing Optimization, [https://yenra.com/ai20/carpooling-and-ridesharing-optimization/]
-* Estimating emissions reductions with carpooling and vehicle dispatching in ridesourcing mobility, 2024, [https://www.nature.com/articles/s44333-024-00015-3]
+* [Multi-Agent Reinforcement Learning: A Review of Challenges and Applications](https://www.mdpi.com/2076-3417/11/11/4948), 2021
+* [Geospatial Data in Transportation & Route Planning UAE](https://u.ae/en/information-and-services/transportation/geospatial-data-in-transportation)
+* [What are the top urban planning software tools for simulating traffic flow in cities?](https://www.linkedin.com/advice/0/what-top-urban-planning-software-tools-simulating-0nenc)
+* [20 Ways AI is Advancing Carpooling and Ridesharing Optimization]([https://yenra.com/ai20/carpooling-and-ridesharing-optimization/)
+* [Estimating emissions reductions with carpooling and vehicle dispatching in ridesourcing mobility](https://www.nature.com/articles/s44333-024-00015-3), 2024
