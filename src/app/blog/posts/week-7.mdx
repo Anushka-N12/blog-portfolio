@@ -1,0 +1,102 @@
+---
+title: "Week #7 - Checkpoint & Focused Research"
+publishedAt: "2025-03-08"
+summary: "Checkpoint & Focused Research"
+tag: "progress"
+---
+
+At class, Roshan sir conducted individual checkpoint sessions, where he checked each student's progress of their blogs & reports. 
+I showed him my blog, with all pages updated till this week & all meetings with my supervisor so far. 
+
+## This Week's Work
+
+This week, I focused on understanding **Reinforcement Learning (RL)** basics before diving into the approaches used in the research papers. Here's a breakdown of my progress:
+
+---
+
+### Learning Reinforcement Learning Basics
+- Started with the **[MIT Lecture on RL](https://www.youtube.com/watch?v=8JVRbHAVCws)**, which was insightful and engaging.
+- Followed a **[YouTube playlist](https://www.youtube.com/playlist?list=PLTl9hO2Oobd9kS--NgVz0EPNyEmygV1Ha)** for additional clarity on RL concepts.
+- Needed multiple sources to grasp ML theories and build intuition. The lack of content on **Spiking Neural Networks (SNNs)** led me to focus on RL for this project.
+
+---
+
+### Understanding MDPs (Markov Decision Processes)
+- Explored the first section of the paper, which focuses on **MDPs**.
+- Watched intuitive videos like this one from **[Computerphile](https://www.youtube.com/watch?v=2iF9PRriA7w)**, which used traffic examples to explain MDPs.
+- Clarified the difference between **Value-based** and **Policy-based** approaches with additional videos.
+
+---
+
+### Researching Existing Approaches
+- Before meeting my supervisor, I wanted to clearly explain:
+  - What has already been done in the field.
+  - What I’m adding to the existing work.
+- Reviewed **Google Scholar** and the university database again using relevant keywords.
+- Found a few implementations, but most were similar. One approach involved **multiple agents**, but I decided not to increase the complexity at this stage.
+
+---
+
+### Structuring My Proposal
+- My proposal includes:
+  1. **Introduction to the problem**.
+  2. **Explanation of current approaches**.
+  3. **My approach** and its unique contributions.
+
+---
+
+### Analyzing the Papers
+1. [**First Paper:**](https://www.sciencedirect.com/science/article/pii/S0952197616000038?fr=RR-2&ref=pdf_download&rr=91ec991d3c129b7f)
+   - Formulated the problem as a **standard MDP**.
+   - Used **predictions as inputs** and a **macroscopic, scalable framework (METANET)**.
+   - Limitations: Real-world traffic is hard to model precisely, and there are unobserved aspects.
+
+2. **Second Paper:**
+   - Used a **POMDP (Partially Observable Markov Decision Process)**, which aligns with my thoughts.
+   - Applied a more efficient algorithm called **SAC (Soft Actor-Critic)**.
+   - Limitations: Did not include predictions and used **SUMO**, a microscopic model that focuses on individual vehicles (computationally heavy).
+
+---
+
+### My Plan
+- Combine the strengths of both papers:
+  - Use **predictions** and the **METANET framework** from the first paper.
+  - Use the **POMDP formulation** and **SAC algorithm** from the second paper.
+- Add a **safety aspect** inspired by another paper from [**Delft University of Technology**](https://www.tudelft.nl/citg/over-faculteit/afdelingen/transport-planning), which highlighted the importance of safety in real-world applications (e.g., sudden changes in speed limits due to accidents) - [WCSAC: Worst-Case Soft Actor Critic for Safety-Constrained Reinforcement Learning](https://www.researchgate.net/publication/362024802_WCSAC_Worst-Case_Soft_Actor_Critic_for_Safety-Constrained_Reinforcement_Learning)
+- Use an upgraded version of METANET called [I-METANET](https://doi.org/10.1177/03611981241297639)
+
+---
+
+### Referenced Papers & Videos
+- [A Comparison of Different State Representations for Reinforcement Learning Based Variable Speed Limit Control](https://ieeexplore.ieee.org/abstract/document/8442986), University of Zagreb
+- [Developing Variable Speed Limit Control and Ramp Metering Strategy for Freeways Using Deep Reinforcement Learning](https://s-space.snu.ac.kr/handle/10371/181158), SNU
+- [Reinforcement learning approach to develop variable speed limit strategy using vehicle data and simulations](https://www.tandfonline.com/doi/abs/10.1080/15472450.2024.2312808), Hanyang University
+- [An Eligibility Traces based Cooperative and Integrated Control Strategy for Traffic Flow Control in Freeways](https://ieeexplore.ieee.org/abstract/document/8965184), Sadjad University of Technology
+- [Flow: Traffic simulation joins forces with deep reinforcement learning and cloud computing](https://its.berkeley.edu/node/13366)
+- [Accounting for dynamic speed limit control in a stochastic traffic environment: A reinforcement learning approach](https://doi.org/10.1016/j.trc.2014.01.014), Purdue University
+- [A case for the adoption of decentralised reinforcement learning for the control of traffic flow on South African highways](https://www.scielo.org.za/scielo.php?pid=S1021-20192019000300002&script=sci_arttext), South African Institution of Civil Engineering
+- [Learning safety in model-based Reinforcement Learning using MPC and Gaussian Processes](https://www.sciencedirect.com/science/article/pii/S2405896323009308)
+- [Reinforcement Learning with Model Predictive Control for Highway Ramp Metering](https://arxiv.org/pdf/2311.08820), Delft University of Technology
+- [A simple roadway control system for freeway traffic](https://ieeexplore.ieee.org/document/1657497?denied=), USC
+- [METANET model improvement for traffic control](METANET model improvement for traffic control), UC Berkeley
+- [Traffic simulation with METANET](https://www.researchgate.net/publication/251206064_Traffic_simulation_with_METANET)
+- 
+- [Soft Actor-Critic: a beginner-friendly introduction](https://www.youtube.com/watch?v=LN29DDlHp1U), Youtube
+- [Soft Actor-Critic | Lecture 83 (Part 3) | Applied Deep Learning](https://www.youtube.com/watch?v=rXuAyHQghKw), CU Boulder
+
+---
+
+### Proposal Submission
+- Here’s the **[link to my proposal](https://docs.google.com/document/d/1JfOVHb6k1GROcp6cBfZ_PSiFIJ_3VvLJ/edit?usp=sharing&ouid=100640676487683067455&rtpof=true&sd=true)** for review.
+
+---
+
+## Key Takeaways
+- **Reinforcement Learning Basics:** Explored MDPs, Value-based vs. Policy-based approaches.
+- **Research Insights:** Analyzed two key papers, identifying their strengths and limitations.
+- **My Approach:** Combining predictions, METANET, POMDP, and SAC for a scalable and safe solution.
+- **Next Steps:** Submit proposal and refine the approach based on feedback.
+
+---
+
+This week was all about building a strong foundation and aligning my approach with existing research. Looking forward to the next steps!

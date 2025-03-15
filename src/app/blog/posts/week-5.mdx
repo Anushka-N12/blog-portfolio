@@ -5,53 +5,138 @@ summary: "Designing an Intuitive User Interface"
 tag: "progress"
 ---
 
-This lecture focused on User Experience (UX) and Prototyping, emphasizing the importance of designing user-centered products and using prototyping techniques to bring ideas to life. 
-Here's a summary of the key points:
+## Lecture Summary: User Experience (UX) & Prototyping
 
-User Experience (UX) focuses on understanding users' needs, values, abilities, and limitations while aligning with business goals. 
-It aims to improve the quality of user interaction and perception of a product or service.
-Key factors: Useful, Usable, Desirable, Findable, Accessible, and Credible design.
+This week’s lecture focused on **User Experience (UX)** and **Prototyping**, emphasizing the importance of designing user-centered products and using prototyping techniques to bring ideas to life. Here’s a summary of the key points:
 
-Prototyping involves creating early, scaled-down models or versions of a product to test concepts and gather feedback. It helps visualize ideas, communicate design intent, and validate concepts before full development.
-Why Prototype? Saves time and money, and allows early feedback and iterative improvement ("Fail faster, succeed sooner").
-Fidelity: Prototypes can range from low-fidelity (lo-fi) (simple, less detailed) to high-fidelity (hi-fi) (detailed, closer to the final product).
+---
 
-Prototyping Techniques:
-1. Paper Prototyping - Sketches and storyboards for quick visualization.
-2. Digital Click-Through Prototypes - Interactive UI mockups without coding.
-3. Coded Prototypes - Functional prototypes using front-end/back-end code.
-4. Rapid Prototyping - Quick physical models (e.g., 3D printing) for iterative design.
-5. Virtual Prototyping - Simulating system behavior to minimize costs.
+### User Experience (UX)
+- **Definition:** UX focuses on understanding users' needs, values, abilities, and limitations while aligning with business goals.
+- **Goal:** Improve the quality of user interaction and perception of a product or service.
+- **Key Factors:** Useful, Usable, Desirable, Findable, Accessible, and Credible design.
 
-Some Testing & Feedback options mentioned:
-* Usability Testing - Evaluates functionality, usability, and user experience.
-* Expert Testing - Involves UX experts and domain specialists to provide feedback.
-* Importance of Feedback - Continuous feedback helps refine prototypes and improve the final product.
+---
+
+### Prototyping
+- **Definition:** Creating early, scaled-down models or versions of a product to test concepts and gather feedback.
+- **Why Prototype?**
+  - Saves time and money.
+  - Allows early feedback and iterative improvement ("Fail faster, succeed sooner").
+- **Fidelity:** Prototypes can range from **low-fidelity (lo-fi)** (simple, less detailed) to **high-fidelity (hi-fi)** (detailed, closer to the final product).
+
+---
+
+### Prototyping Techniques
+1. **Paper Prototyping:** Sketches and storyboards for quick visualization.
+2. **Digital Click-Through Prototypes:** Interactive UI mockups without coding.
+3. **Coded Prototypes:** Functional prototypes using front-end/back-end code.
+4. **Rapid Prototyping:** Quick physical models (e.g., 3D printing) for iterative design.
+5. **Virtual Prototyping:** Simulating system behavior to minimize costs.
+
+---
+
+### Testing & Feedback
+- **Usability Testing:** Evaluates functionality, usability, and user experience.
+- **Expert Testing:** Involves UX experts and domain specialists to provide feedback.
+- **Importance of Feedback:** Continuous feedback helps refine prototypes and improve the final product.
+
+---
+
+### Key Takeaways from the Lecture
+- **Prototyping is Essential:** It brings ideas to life, tests concepts, and improves designs.
+- **Choose the Right Technique:** The choice of prototyping technique (lo-fi to hi-fi) depends on the project's goals, technology, and resources.
+- **Tools and Methods Vary:** From simple sketches to advanced simulations and coded prototypes.
+- **Testing and Feedback are Critical:** They ensure the final product meets user needs.
+
+---
+
+## This Week's Work: Wildlife Conservation Project
+
+This week, I focused on finding an **impactful project idea** and narrowed it down to **wildlife conservation**, specifically **bee conservation**. Here’s what I explored:
+
+---
+
+### Why Bees?
+- **Importance:** Bees are essential for maintaining life on Earth, particularly through pollination.
+- **Conservation Challenge:** One conservation method involves physically relocating bees to areas with low populations, which requires knowledge of **bee subspecies distribution**.
+
+---
+
+### Proposed Solution: Bee Subspecies Monitoring System
+- **Implementation:** A system to classify bee subspecies using images.
+- **Preprocessing:** Techniques to efficiently process continuous frames from cameras.
+- **Core Technology:** **Spiking Neural Networks (SNNs)**.
+
+---
+
+### Spiking Neural Networks (SNNs)
+- **Why SNNs?** 
+  - Unlike traditional Artificial Neural Networks (ANNs), which process data through the entire architecture, SNNs mimic the human brain by activating only specific neurons for a given task.
+  - This reduces **compute power** and **energy consumption**, making SNNs ideal for **edge devices** like cameras that need to operate for long periods without frequent recharging.
+- **Implementation Plan:** Use **neuromorphic hardware** (e.g., FPGA) to support SNNs.
+
+---
+
+### First-Cut Proposal
+- I submitted a first-cut proposal for the project, titled **Spike**.  
+  [Link to Proposal](https://docs.google.com/document/d/1Rlf51nyLFMphXvswXiHSH5fpzD1gSeEr/edit?usp=drive_link&ouid=100640676487683067455&rtpof=true&sd=true)
+
+---
+
+### Research and Resources
+- [Spiking Neural Networks for More Efficient AI Algorithms](https://www.youtube.com/watch?v=PeW-TN3P1hk)
+- [Training Spiking Neural Networks Using Lessons From Deep Learning](https://www.youtube.com/watch?v=zldal7b7sJ4)
+- [Intel Advances in AI: Brain-Like Computing and Spiking Neural Networks Explained](https://www.youtube.com/watch?v=GY69IuTLmkk)
+- [Cosyne 2022 Tutorial on Spiking Neural Networks](https://www.youtube.com/watch?v=GTXTQ_sOxak)
+- [ESWEEK 2021 Education - Spiking Neural Networks](https://www.youtube.com/watch?v=7TybETlCslM)
+- [What are Spiking Neurons?](https://www.youtube.com/watch?v=E5Iju6jK3OY&t=193s)
+- [Neuromorphic systems - Introduction to neuromorphic hardware and computing](https://www.youtube.com/watch?v=FQhq0vHrQR8)
+- [introduction to spiking neural networks: information processing, learning and applications](https://ane.pl/index.php/ane/article/view/1862/1859)
+- [Spiking Neural Networks and Their Applications: A Review](https://www.mdpi.com/2076-3425/12/7/863)
+- [Going Deeper in Spiking Neural Networks: VGG and Residual Architectures](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2019.00095/full)
+- [Garrick Orchard: Spiking Neural Networks for Event-based Vision](https://www.youtube.com/watch?v=wCs2lv3g4A4)
+- [SpikeMS: Deep Spiking Neural Network for Motion Segmentation](https://arxiv.org/abs/2105.06562)
+- [SpikeMotion: A Transformer Framework for High - Throughput Video Segmentation on FPGA](https://ieeexplore.ieee.org/document/10658767)
+- [MTSA-SNN: A Multi-modal Time Series Analysis Model Based on Spiking Neural Network](https://arxiv.org/html/2402.05423v2)
+- [Comparison of Artificial and Spiking Neural Networks on Digital Hardware](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2021.651141/full)
+- [Are SNNs really more energy-efficient than ANNs? An in-depth hardware-aware study](https://cea.hal.science/cea-03852141/file/Are_SNNs_Really_More_Energy_Efficient_Than_ANNs__An_In_Depth_Hardware_Aware_Study_versionacceptee.pdf)
+- [Advantages and Disadvantages of Spiking Neural Networks Compared to Classical Artificial Neural Networks](https://ieeexplore.ieee.org/document/10397433)
+- [Optimal ANN-SNN Conversion for Fast and Accurate Inference in Deep Spiking Neural Networks](https://www.ijcai.org/proceedings/2021/0321.pdf)
+- [Spiking Neural Networks Hardware Implementations and Challenges: a Survey](https://arxiv.org/abs/2005.01467)
+- [A Review of Algorithms and Hardware Implementations for Spiking Neural Networks](https://www.mdpi.com/2079-9268/11/2/23)
+- [A Spiking Neural Network Framework for Robust Sound Classification](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2018.00836/full)
+- [A damage assessment methodology for structural systems using transfer learning from the audio domain](https://www.sciencedirect.com/science/article/pii/S0888327023001930?via%3Dihub)
+- [Damage Detection in Structural Health Monitoring with Spiking Neural Networks](https://ieeexplore.ieee.org/document/9488476)
+- [Damage Detection Dataset for Concrete Structures with Multi-Feature Backgrounds](https://data.mendeley.com/datasets/9t3y6hhddk/1)
+- [High-Performance SNN Simulation on 8 GPUs - PhD Defense](https://www.youtube.com/watch?v=hP295orEs4c&t=368s)
+- [Spiking Neural Network on FPGA Playlist](https://www.youtube.com/playlist?list=PLGzeDuLmmxDrT1anK6PfgURjwVbwevuLV), Dr. Marco Winzker, Hochschule Bonn-Rhein-signature
+- [FPGA Implementation of Addition-based CORDIC-SNN With Izhikevich Neurons](https://ieeexplore.ieee.org/document/9908081/)
+- [A digital hardware implementation of spiking neural networks with binary FORCE training](https://doi.org/10.1016/j.neucom.2020.05.044)
+- [On-FPGA Spiking Neural Networks for Multi-variable End-to-End Neural Decoding](https://link.springer.com/chapter/10.1007/978-3-031-42921-7_13)
+- [Hardware implementation of spiking neural networks on FPGA](https://ieeexplore.ieee.org/abstract/document/8954866)
+- [NengoFPGA - Framework to run SNNs on FPGA](https://www.nengo.ai/nengo-fpga/)
+- [A Deep Learning Approach to classify the Honeybee Species and health Identification](https://ieeexplore.ieee.org/abstract/document/9445173)
+- [Image recognition using convolutional neural networks for classification of honey bee subspecies](https://link.springer.com/article/10.1007/s13592-022-00918-5)
+- [Developing a Multimodal System for Bee Object Detection and Health Assessment](https://ieeexplore.ieee.org/document/10684835)
+- [Beescape - Landscape visualisation Tool](https://pollinators.psu.edu/bee-health/beescape), Penn State
+- [GIS-Based Interactive Map to Improve Scheduling Beekeeping Activities](https://www.mdpi.com/2077-0472/13/3/669)
+
+# Summary
+
+This week was a mix of learning and exploration. Key takeaways:
+- **UX & Prototyping:** Learned the importance of user-centered design and iterative prototyping.
+- **Wildlife Conservation Project:** Narrowed down to bee conservation and proposed a monitoring system using SNNs.
+- **Next Steps:** Refine the proposal, explore SNN frameworks, and plan the implementation.
+
+---
 
 ## Key Takeaways
+- **UX Design:** Focus on user needs and iterative prototyping to create effective products.
+- **Bee Conservation:** A critical area with potential for impactful technological solutions.
+- **SNNs:** A promising technology for energy-efficient, edge-based applications.
+- **Next Steps:** Finalize the proposal and dive deeper into SNN implementation.
 
-Prototyping is essential for bringing ideas to life, testing concepts, and improving designs.
-The choice of prototyping technique (lo-fi to hi-fi) depends on the project's goals, technology, and resources.
-Tools and methods vary, from simple sketches to advanced simulations and coded prototypes.
-Testing and feedback are critical for refining prototypes and ensuring the final product meets user needs.
+---
 
-## This week's work
-
-I started this week's search with an intention is the project being impactful. I narrowed down to wildlife conservation.
-Among the different species, I found that bees in particular are essential is maintaining life on Earth.
-One of the processes of conservation itself involved physically relocating bees to specific locations where their popolation is low.
-This required the knowledge of how many of which subspecies of bees are in which location. This is where I could place a monitoring system.
-
-The implementation would require classification of bee subspecies with images, which I have worked on before.
-To add on to this, I intend to implement techniques in preprocessing to efficiently process continuous frames.
-The main part of my proposal was the use of a class of neural networks called Spiking Neural Networks.
-The more common Artificial NNs ran data thorugh the whole of its architecture to output a result. It has proved to be revolutionary in various areas, from computer vision to natural language processing.
-But the boom of ANNs came with the demand for exponential compute power. In comparison, SNNs more closely modelled the human brain - our brains do not run data through every single neuron to output a result, only some parts of it depending on the task at hand.
-Similarly, SNNs dynamically produces 'spikes' in its neurons, meaning only some computation in the architecture will take place for a given input. This would drastically reduce the compute power and electricity required for running them.
-Is this use-case, edge devices with cameras need to be exposed to observe its environment for long amounts of time, and they cannot be recharged constantly, so this method was more suitable.6
-I learnt about the concept, as well as the frameworks used to implement them. SNNs were usually supported by neuromorphic hardware, so I planned to implement the mechanisms onto an FPGA.
-
-This is the first-cut proposal that I submitted - [Spike](https://docs.google.com/document/d/1Rlf51nyLFMphXvswXiHSH5fpzD1gSeEr/edit?usp=drive_link&ouid=100640676487683067455&rtpof=true&sd=true).
-
-Some papers & videos I went through:
-* 
+This week set the stage for an exciting project. Looking forward to refining the idea and starting the implementation!
