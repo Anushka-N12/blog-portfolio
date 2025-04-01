@@ -1,0 +1,34 @@
+---
+title: "Project Development"
+publishedAt: "2025-03-30"
+summary: "Project Development"
+tag: "progess"
+---
+
+### Key Takeaways from Lecture
+
+1. **Layered Protection:** Use multiple legal mechanisms (copyright + patents + trade secrets) for comprehensive coverage
+2. **Copyright Limitations:** Protects expression but not underlying ideas or methods
+3. **Patent Evolution:** Software patentability has significantly expanded since the 1970s
+4. **Global Differences:** Patent protection varies by jurisdiction
+5. **Documentation Matters:** Proper patent applications require specific types of technical drawings and descriptions
+
+Understanding these protection methods is crucial for software developers and companies to safeguard their intellectual property investments.
+
+## This week's work
+ 
+Time to build the actor-critic model. With some generic tutorials, I wrote a basic network with TensorFlow. To avoid unneccessary computation, the feature extraction part of the model was comon, and it then diverged into the actor & critic outputs. 
+I intended to keep a modular structure throughout this project, so I began with network.py. I also wanted to follow class & method formats that I hadn't done before, because I have noticed it in other repos, those which are more sophisticated. 
+So in network.py, I wrote a class called ACNetwork, which takes in a number of actions, along with minimum & maximum speed limits from this use-case since its regulatory. 
+I defined the network in the init function. I wrote 2 dense layers for now, intending to experiment with the number of layers & neurons later. This will be the freature extracter.
+For the other end, I wrote one layer with 1 neuron and no activation, for the value function, the critic output.
+For the actor, I wrote 2 layers, one for a mean and other for a standard deviation, which can be used to represent a distribution over the continous speed action space.
+The mean layer has 1 neuron with tanh activation, that otuputs a value between -1 & 1, and another layer after that to scale it to fall between given speed limits.
+A call method was made to bring the layers together. Tensorflow's functional API syntax was used to do this since it's not fully sequential and is branched. 
+
+Then I defined agent.py, where it was given the same 3 inputs, and the init function defined its action space using the gym library to create a distribution over the given speed limits. 
+
+Before trying it out, I needed to define the equations needed for the calculations within the network.
+
+Tutorials referred to:
+- [Everything You Need To Master Actor Critic Methods | Tensorflow 2 Tutorial](https://www.youtube.com/watch?v=LawaN3BdI00)

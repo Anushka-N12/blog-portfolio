@@ -1,127 +1,11 @@
 ---
-title: "Week #8 - Blog Format & Start of the Project"
+title: "Week #8 - Start of the Project"
 publishedAt: "2025-03-16"
-summary: "Blog Format & Start of the Project"
+summary: "Start of the Project"
 tag: "progress"
 ---
 
-# Normalization and Debugging: Key Concepts and Strategies
-
-Normalization: A set of rules that tables & databases must follow to be well-structured. 
-It is historically presented as a sequence of normal forms.
-
-### First Normal Form (1NF):
-- The domain of each attribute contains only atomic values.
-- Each attribute contains only a single value from that domain.
-
-**Example:** In a library database, every column should contain single values.
-
-### Functional Dependency
-- **Functional Dependency (FD):** Y is functionally dependent on X if each set x in X corresponds to precisely one set y in Y.
-- **Full Functional Dependency:** Y is fully functionally dependent on X if Y is not dependent on any proper subset of X.
-
-**Example:** In a `Book` table, the `Author` attribute is functionally dependent on `{BookNo, Title}`.
-
-### Problems with Non-Normalized Tables
-- **Insertion Anomaly:** Cannot insert new data without related data.
-- **Update Anomaly:** Must update multiple rows for a single change.
-- **Deletion Anomaly:** Loss of information when deleting data.
-
-### Armstrong Inference Rules (1974)
-- **Axioms:** Reflexivity, Augmentation, Transitivity.
-- **Derived Rules:** Union, Decomposition, Pseudotransitivity.
-
-### Second Normal Form (2NF):
-- It is in 1NF.
-- No non-prime attribute is dependent on any proper subset of any candidate key.
-
-**Example:** In a library, `Patron → PhoneNo` is a dependency that violates 2NF.
-
-### Third Normal Form (3NF):
-- It is in 2NF.
-- All attributes are determined only by candidate keys, not by non-prime attributes.
-
-**Example:** In a `BorrowedBooks` table, `Patron → Address` violates 3NF.
-
-### Boyce-Codd Normal Form (BCNF)
-A stricter form of 3NF where every non-trivial dependency `X → Y` must have `X` as a superkey.
-
-### Fourth Normal Form (4NF)
-A table is in 4NF if:
-- For every non-trivial multivalued dependency `X => Y`, `X` is a candidate key or a superset of a candidate key.
-
-### Fifth Normal Form (5NF)
-A table is in 5NF if every non-trivial join dependency is implied by its candidate keys.
-
-### Lossless Decomposition
-A decomposition is lossless if the original table can be recreated by joining the decomposed tables without losing information.
-
----
-
-## Coding and Debugging
-
-Debugging: The process of identifying and resolving errors (bugs) in software systems. Ensures software quality and performance; Enhances user satisfaction.
-
-### Goals of Debugging
-- Detect and fix bugs efficiently.
-- Maintain software stability.
-
-### Debugging Process
-1. **Reproduce the Bug:** Recreate the conditions that caused the bug.
-2. **Locate the Bug:** Find where the bug is in the code.
-3. **Identify the Root Cause:** Understand why the bug happened.
-4. **Fix the Bug:** Make necessary changes to the code.
-5. **Test the Fix:** Run tests to ensure the bug is resolved.
-6. **Document the Process:** Record the details of the bug and the fix.
-
-### Debugging Approaches/Strategies
-- **Brute Force:** Study the system for a longer duration.
-- **Backtracking:** Trace the program backward from the failure point.
-- **Forward Analysis:** Trace the program forward using breakpoints.
-- **Cause Elimination:** Isolate potential causes using binary partitioning.
-- **Static Analysis:** Analyze code without executing it.
-- **Dynamic Analysis:** Execute code and analyze its behavior at runtime.
-- **Collaborative Debugging:** Multiple developers work together to debug.
-- **Logging and Tracing:** Use logs to identify the sequence of events.
-- **Automated Debugging:** Use tools to assist in debugging.
-
-### Common Errors During Debugging
-- Syntax errors
-- Logical errors
-- Runtime errors
-- Stack overflow
-- Index Out of Bound Errors
-- Infinite loops
-- Concurrency Issues
-- I/O errors
-
-### Debugging Tools
-1. **Integrated Development Environments (IDEs):** Visual Studio, Eclipse, PyCharm.
-2. **Standalone Debuggers:** GDB (GNU Debugger).
-3. **Logging Utilities:** Log program states for analysis.
-4. **Static Code Analyzers:** Examine code without execution.
-5. **Dynamic Analysis Tools:** Monitor software at runtime.
-6. **Performance Profilers:** Identify performance bottlenecks.
-
-### Testing vs Debugging
-- **Testing:** Identify problems before software is put to use.
-- **Debugging:** Locate and fix bugs.
-
-### Hints for Success
-- Understand the algorithm before coding.
-- Start small and test simpler methods first.
-- Use print statements and debuggers effectively.
-
-### Defensive Programming
-- Write robust programs by checking for exceptional conditions.
-- Generate appropriate error messages and handle exceptions.
-
----
-
-By following these normalization rules and debugging strategies, one can create well-structured databases and reliable software systems.
-My project does not involve databases. 
-
-## Key Takeaways
+## Key Takeaways from Lecture
 
 ### Normalization
 - **1NF:** Atomic values in each column.
@@ -150,11 +34,23 @@ I aimed to understand the overall theorical knowledge needed to understand how t
 The RL concepts needed, libraries commonly used to formulate them, etc. 
 I also wanted to gather data from Dubai's most congested highways, like Sheikh Mohammed Road, which I frequent daily, spending over 2 hours one-way.
 
-I also got started with the report, and will be updating it daily as I learn more about this project & progress with the implementation. To begin with, I went through the provided samples and made a template with the content relevant to the project. I wrote some of the sections, like abstract, introduction, etc. We were told to follow IEEE style referencing, so added the papers I;ve referenced so far as well.  
+I also got started with the report, and will be updating it daily as I learn more about this project & progress with the implementation. To begin with, I went through the provided samples and made a template with the content relevant to the project. I wrote some of the sections, like abstract, introduction, etc. We were told to follow IEEE style referencing, so added the papers I've referenced so far as well.  
+
+Some notes I made while learning:
+- Q-Learning gives the probability of how good an action is, given a state, ie. how big the reward is asa result of it. The action with the highest rewards is chosen. However, the policy is not explicitly learned; it’s implicit in the Q-values.
+- Policy Learning gives the probability of selecting an action, given a state, ie. maps states to actions directly without computing each reward. 
+
+- When to use which: 
+    - Q-learning is great for discrete action spaces and when you need precise value estimates.
+    - Policy learning is more flexible and can handle continuous action spaces or complex policies (e.g., neural networks).
+
 
 Referenced Papers & Videos:
 - [A friendly introduction to deep reinforcement learning, Q-networks and policy gradients](https://www.youtube.com/watch?v=SgC6AZss478), Serrano Academy
+- [Policies and Value Functions - Good Actions for a Reinforcement Learning Agent](https://www.youtube.com/watch?v=eMxOGwbdqKY), DeepLizard
 - [Reinforcement Learning: on-policy vs off-policy algorithms](https://www.youtube.com/watch?v=YUKUXoUg3Nc), CodeEmperium
+- [Soft Actor-Critic: a beginner-friendly introduction](https://www.youtube.com/watch?v=LN29DDlHp1U), Youtube
+- [Soft Actor-Critic | Lecture 83 (Part 3) | Applied Deep Learning](https://www.youtube.com/watch?v=rXuAyHQghKw), CU Boulder
 - [Traffic APIs | TomTom](https://www.tomtom.com/products/traffic-apis/)
 
 ## Student Tracker Submission

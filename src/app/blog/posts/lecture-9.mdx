@@ -1,0 +1,109 @@
+---
+title: "Week #9 - Testing Methods"
+publishedAt: "2025-03-19"
+summary: "Testing Methods"
+tag: "lecture"
+---
+
+## Software Testing Principles
+
+Testing involves executing programs to find faults while balancing:
+- **Verification:** Proving program correctness
+- **Validation:** Finding errors in real environments  
+- **Debugging:** Diagnosing and correcting errors
+
+Key principle: Remove defects early since testing's quality improvement potential is limited.
+
+---
+
+## Types of Software Tests
+
+| Test Type | Description | Pros | Cons |
+|-----------|-------------|------|------|
+| **Unit Testing** (White Box) | Tests individual components | High code coverage | Tester bias possible |
+| **Integration Testing** | Combines modules | Catches interface issues | Complex to orchestrate |
+| **Function Testing** (Black Box) | Tests against specifications | Unbiased by implementation | Limited test coverage |
+| **Regression Testing** | Checks effects of changes | Maintains existing functionality | Test selection challenging |
+| **System Test** | Full system evaluation | Real-world simulation | Resource intensive |
+| **Acceptance Tests** | Client validation | Confirms business needs | Late-stage discovery |
+
+---
+
+### Testing Strategies
+
+**Black-Box Testing:**
+- Based on functional specs only
+- Simulates real user behavior
+- Also called functional testing
+
+**White-Box Testing:**
+- Requires internal structure knowledge
+- Focuses on code paths
+- Also called structural testing
+
+---
+
+## Integration Approaches
+
+### Top-Down Testing
+**Process:** 
+1. Test control program first  
+2. Integrate modules one-by-one
+
+**Pros:**
+- No test drivers needed
+- Early interface error detection
+
+**Cons:**
+- Requires test stubs  
+- Critical low-level errors found late
+
+### Bottom-Up Testing  
+**Process:**
+1. Test low-level modules first
+2. Build upward
+
+**Pros:**
+- No stubs needed
+- Early critical module validation
+
+**Cons:**
+- Requires test drivers
+- Late interface error discovery
+
+---
+
+## Test Planning Essentials
+
+**When:** Starts during requirements phase  
+**Key Elements:**
+- Objectives for each phase
+- Schedules and responsibilities  
+- Resource availability
+- Completion criteria
+
+---
+
+## Test Execution Best Practices
+
+1. Treat testing as scientific experiments
+2. Document all anomalous behavior  
+3. Maintain test libraries (reports, incidents, plans)
+4. For real-time systems:
+   - Test for deadlocks/thrashing  
+   - Simulate hardware faults
+   - Stress test designs
+   - Account for missing modules
+
+---
+
+## Key Takeaways
+
+1. **Balance test types** - Combine white-box and black-box approaches
+2. **Plan early** - Start during requirements phase
+3. **Document rigorously** - Maintain complete test records  
+4. **Test realistically** - Simulate actual deployment environments
+5. **Automate regression** - Crucial for maintaining quality
+
+Testing remains one of the most critical phases of software development, directly impacting product quality and reliability.
+ 
