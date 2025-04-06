@@ -1,7 +1,7 @@
 ---
-title: "Week #10 - Project Development"
+title: "Week #10 - Start of Development"
 publishedAt: "2025-03-30"
-summary: "Project Development"
+summary: "Start of Project Development"
 tag: "progess"
 ---
 
@@ -25,8 +25,128 @@ For the other end, I wrote one layer with 1 neuron and no activation, for the va
 For the actor, I wrote 2 layers, one for a mean and other for a standard deviation, which can be used to represent a distribution over the continous speed action space.
 The mean layer has 1 neuron with tanh activation, that otuputs a value between -1 & 1, and another layer after that to scale it to fall between given speed limits.
 A call method was made to bring the layers together. Tensorflow's functional API syntax was used to do this since it's not fully sequential and is branched. 
+<CodeBlock className="my-24"
+    compact={false}
+    codeInstances={[
+        {
+            code: `import tensorflow.keras as keras
+from tensorflow.keras.layers import Dense, Lambda
+import os
 
-Then I defined agent.py, where it was given the same 3 inputs, and the init function defined its action space using the gym library to create a distribution over the given speed limits. 
+class ACNetwork(keras.Model):
+    def __init__(self, n_actions, min_s, max_s,
+                 l1_dims=1024, l2_dims=512,
+                 name='acn', cp_dir='acn_cp'):
+        super(ACNetwork, self).__init__()
+        self.n_actions = n_actions
+        self.name = name
+        self.cp_dir = cp_dir
+        self.min_s = min_s
+        self.max_s = max_s
+        self.l1_dims = l1_dims
+        self.l2_dims = l2_dims
+    
+        self.l1 = Dense(self.l1_dims, activation='relu')
+        self.l2 = Dense(self.l2_dims, activation='relu')
+        self.value_f = Dense(1, activation=None)
+        
+        self.mean = Dense(1, activation='tanh')
+        self.scaled_mean = Lambda(lambda x: min_s + (max_s - min_s) * (x + 1) / 2)
+        self.std_dev = Dense(1, activation='softplus')
+
+    def call(self, state):
+        features = self.l2(self.l1(state))
+        value = self.value_f(features)
+        mean = self.scaled_mean(self.mean(features))
+        std_dev = self.std_dev(features)
+        return value, mean, std_dev`,
+            label: 'network.py',
+            language: 'python',
+            showLineNumbers: true
+        },
+    ]}
+    copyButton
+    maxHeight="400px"
+/>
+
+Then I defined agent.py, where it was given the same 3 inputs, and the init function defined its action space using the gym library to create a distribution over the given speed limits.
+Unlike the original script which used a Categorical distribution which was meant for discrete actions, I replaced this with a Normal/Gaussian distribution, where the actor outputs a mean and standard deviation. 
+Two versions of action selection are implemented: a stochastic one for training (sampled from the distribution) and a deterministic one (using the mean) for evaluation or deployment. 
+A few mofe methods were created - one for saving models, one for loading them, and one for learning - that calculated the rewards combining the 3 outputs. 
+
+
+<CodeBlock className="my-24"
+    compact={false}
+    codeInstances={[
+        {
+            code: `import tensorflow as tf
+from tensorflow.keras.optimizers import Adam
+import tensorflow_probability as tfp
+import gym
+import numpy as np
+from network import ACNetwork
+
+tfd = tfp.distributions
+
+class ACAgent:
+    def __init__(self,  n_actions, min_s, max_s,
+                 alpha=0.0003, gamma=0.99):   # Alpha is default learning rate
+        self.gamma = gamma                    # Gamma is default discount factor
+        self.n_actions = n_actions
+        self.action = None
+        self.action_space = gym.spaces.Box(low=np.array([min_s]), high=np.array([max_s]), dtype=np.float32)
+
+        self.ac = ACNetwork(n_actions, min_s, max_s)
+        self.ac.compile(optimizer=Adam(learning_rate=alpha))
+
+    def choose_action(self, observation, evaluate=False):
+        state = tf.convert_to_tensor([observation], dtype=tf.float32)
+        std, mean = self.ac(state)     # Call function is called automatically called 
+                                       # when model instance is created
+        # Create a Gaussian distribution with reparameterization
+        dist = tfd.Normal(loc=mean, scale=std)
+        if evaluate:       # Use mean for evaluation (deterministic)
+            action = mean
+        else:              # Sample from distribution (stochastic)
+            action = dist.sample()
+        self.action = action
+        return action.numpy()[0]
+
+    def save_models(self):
+        print('Saving models......')
+        self.ac.save_weights(self.ac.cp_file)
+        
+    def load_models(self):
+        print('Loading models......')
+        self.ac.load_weights(self.ac.cp_file)
+
+    def learn(self, state, reward, n_state, done):
+        state = tf.convert_to_tensor([state], dtype=tf.float32)
+        n_state = tf.convert_to_tensor([n_state], dtype=tf.float32)
+        reward = tf.convert_to_tensor(reward, dtype=tf.float32)
+
+        with tf.GradientTape(persistent = True) as tape:
+            state_value, mean, std = self.ac(state)
+            n_state_value, _, _ = self.ac(n_state)
+            state_value = tf.squeeze(state_value)
+            n_state_value = tf.squeeze(n_state_value)
+            
+            dist = tfd.Normal(loc=mean, scale=std)
+            log_prob = dist.log_prob(self.action)
+            delta = reward + self.gamma*n_state_value(1-int(done)) - state_value
+            a_loss = log_prob*delta
+            c_loss = delta**2
+            t_loss = a_loss + c_loss
+            gradient = tape.gradient(t_loss, self.ac.trainable_variables)
+            self.ac.optimizer.apply_gradients(zip(gradient, self.ac.trainable_variables))`,
+            label: 'agent.py',
+            language: 'python',
+            showLineNumbers: true
+        },
+    ]}
+    copyButton
+    maxHeight="400px"
+/>
 
 Before trying it out, I needed to define the equations needed for the calculations within the network.
 
