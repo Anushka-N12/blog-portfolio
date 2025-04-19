@@ -17,4 +17,23 @@ I also discussed it with my supervisor, and submitted the application. I feel re
 
 ## This week's work
  
-tba
+# Data
+Checked the TomTom API documentation in detail. Here are the detailed API endpoints relevant to this project:
+-	Traffic API – Real-time
+-	Flow Segment Data – Provides current speed, also free flow speed, current & free flow travel times, and shape of road segment.
+-	Vector Flow Tiles – Includes traffic level between 0 & 1.
+-	Incident Details – Describes incidents on bounded area requested.
+-	Traffic Stats API - Historical, returns data over date & time range
+-	Traffic Density Service – Provides density, required to represent current traffic. Also gives static speed limit, and length & shape of road segment.
+-	Area analysis Service – Details of the segment, like overall average speed & travel time, and their standard deviations. This could be useful to bound the speed limits.
+-	Route Analysis Service – Data over a series of points. Useful in case segments made by TomTom itself are not suitable. 
+-	Maps API – Helps with visualization.
+
+# Algorithm Theory
+I understand the concept of actor-critic to some extent, but don't fully know the exact differences between normal actor-critic and SAC. So I studied about that theoretically a bit more, and updated the report with my understanding. 
+
+# Code
+After coding the basic actor-critic & going through some theory, I started to modify my code according to an SAC tutorial. 
+
+# References
+- [Can a Random Reinforcement Learning Agent Maximize its Score? Soft Actor Critic (SAC) in Tensorflow2](https://www.youtube.com/watch?v=YKhkTOU0l20)

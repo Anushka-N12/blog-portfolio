@@ -23,7 +23,7 @@ So in network.py, I wrote a class called ACNetwork, which takes in a number of a
 I defined the network in the init function. I wrote 2 dense layers for now, intending to experiment with the number of layers & neurons later. This will be the freature extracter.
 For the other end, I wrote one layer with 1 neuron and no activation, for the value function, the critic output.
 For the actor, I wrote 2 layers, one for a mean and other for a standard deviation, which can be used to represent a distribution over the continous speed action space.
-The mean layer has 1 neuron with tanh activation, that otuputs a value between -1 & 1, and another layer after that to scale it to fall between given speed limits.
+The mean layer has 1 neuron with tanh activation, that outputs a value between -1 & 1, and another layer after that to scale it to fall between given speed limits.
 A call method was made to bring the layers together. Tensorflow's functional API syntax was used to do this since it's not fully sequential and is branched. 
 <CodeBlock className="my-24"
     compact={false}
@@ -66,14 +66,24 @@ class ACNetwork(keras.Model):
         },
     ]}
     copyButton
-    maxHeight="400px"
+    maxHeight="200px"
 />
 
 Then I defined agent.py, where it was given the same 3 inputs, and the init function defined its action space using the gym library to create a distribution over the given speed limits.
 Unlike the original script which used a Categorical distribution which was meant for discrete actions, I replaced this with a Normal/Gaussian distribution, where the actor outputs a mean and standard deviation. 
 Two versions of action selection are implemented: a stochastic one for training (sampled from the distribution) and a deterministic one (using the mean) for evaluation or deployment. 
-A few mofe methods were created - one for saving models, one for loading them, and one for learning - that calculated the rewards combining the 3 outputs. 
+A few more methods were created - one for saving models, one for loading them, and one for learning - that takes the predictions and applies policy gradients to learn from the results. 
+In the learn function, a custom loss function had to be defined, to give meaningful feedback by combining the results of the 2 branches. In simpler supervised learning tasks, a prefined function like mean square would be mentioned, but those are not appropriate for this task. 
 
+I had taken the (Custom & Distributed Training)[https://www.coursera.org/learn/custom-distributed-training-with-tensorflow] course as a part of the (TensorFlow: Advanced Techniques)[https://www.coursera.org/specializations/tensorflow-advanced-techniques] Specialisation last year.  
+A major part of that course taught how to create custom loss functions, and how to structure the learning function that calculates gradiants to update the network based on the loss.
+I referred back to those videos to understand gradient tape and other things. Here's the order that I need to follow for this part:
+1. Get predictions
+2. Calculate loss
+3. Calculate gradients
+4. Update hyperparameters
+
+Here's the code for the agent:
 
 <CodeBlock className="my-24"
     compact={false}
@@ -145,10 +155,14 @@ class ACAgent:
         },
     ]}
     copyButton
-    maxHeight="400px"
+    maxHeight="450px"
 />
 
-Before trying it out, I needed to define the equations needed for the calculations within the network.
+Before trying it out, I needed to define more equations needed for the calculations within the network.
+Plus, I cannot test it directly following the video because I changed alot, so I need to replace the environment with a continuous space.
+I need to add METANET in to run the simulations. There is a python package I found for that from the same university whose multiple papers I'm referring to, just gotta figure out how to link everything.
+
+P.S. This was just actor-critic, not soft actor critic. I started with this so that I fully understand the difference, and this code will be edited further to correctly implement SAC. 
 
 Tutorials referred to:
 - [Everything You Need To Master Actor Critic Methods | Tensorflow 2 Tutorial](https://www.youtube.com/watch?v=LawaN3BdI00)
