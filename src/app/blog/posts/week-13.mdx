@@ -1,0 +1,57 @@
+---
+title: "Week #13 - Plan"
+publishedAt: "2025-04-20"
+summary: "Plan Deferral Time"
+tag: "progess"
+---
+
+The standard deadline passed, and most completed their vivas too this week. 
+Since I've thankfully been given the much needed extra time, I wanted to plan out the project again,
+so that I can include all the things I wanted to do and deleiver a good product at the end. 
+
+I honestly hit a roadblock. I had written some rough code for the model based on some tutorials, 
+and found a source for the data. But what I didn't know at the beginnning of this semester was that
+research papers only talk about the concept and theoretical steps justifying it, but seldom about the actual steps of implementation.
+I found only one Github repo for the simulation model, but I realised that even if there were more,
+there won't be a solution ready for my use-case - a model that takes in the safety parameter I had in mind, or one where I can control the amount of compliance to the speed limit.
+How to train my model by linking it to this simulation, making it run there and updating itself based on the resultant TTS.
+
+There were a few sample scripts that came with the METANET package, so I went through those to understand
+its current capabilities. It was written by a PhD candidate from the same university as the writer of the main paper, 
+so I was hoping to find atleast some similarities. Here's what I picked up from it:
+- Defines a traffic network using building blocks - Link, Node, Origin, Destination.
+- Sets traffic parameters like max density, free flow speed.
+- Creates a demand profile over time (vehicle inflow).
+- Runs a simulation loop over time using MetaNet's CasADi backend.
+- Records variables like density (rho), speed (v), queue (w).
+- Plots results and calculates a performance metric: TTS (Total Time Spent).
+
+I first broke the task down into smaller chunks to tackle it step-by-step:
+ - TomTom returns road segment structure around given coordinates, and in METANET we define the structure (to some extent).
+ So I'm hoping to pick a road segment that I pass by everyday and know its actual peak times, and try to gather data points from there
+ & simulate in the model.
+ - I want to compare the basic simulation to real data to compare how similar the model is predicting road behaviour. 
+ - Will probably run the API for a while and collect data instead of trying to train in real-time. 
+ - Will try simulating an accident indirectly like suddenly reducing average speed. 
+
+ So here's how I'll approach it:
+
+Step 1: Start by replicating this script: Run it exactly as-is to make sure everything works. Understand how the network is created and how the simulation loop works.
+Step 2: Replace static demands with live/real data: Replace the create_demands function with real traffic flow data from the API. 
+Step 3: Run models together.
+Step 4: Add modifications.
+Step 5: Use partial network to observe performance in comparison. 
+
+How RL Training should work, for each episode (a full simulation run):
+- Reset the MetaNet simulation to its initial state (rho, v, w)
+- For each time step:
+-- Get the current state from MetaNet (e.g., density, speed, queue length, demand)
+-- Feed that state to your agent → it outputs a speed limit (or other action)
+-- Apply the action to MetaNet (i.e., set v_ctrl)
+-- Step the simulation forward (MetaNet gives you the next state, flow, etc.)
+-- Calculate the reward (e.g., based on queue length, speed smoothness, TTS, etc.)
+-- Store the transition (state, action, reward, next_state, done) in the replay buffer
+-- After a few steps or after the episode ends, sample batches from the replay buffer and:
+-- Update the actor and critics
+
+-Repeat over many episodes

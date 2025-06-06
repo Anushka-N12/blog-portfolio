@@ -1,0 +1,19 @@
+---
+title: "Week #14 - Data"
+publishedAt: "2025-04-27"
+summary: "Data Collection"
+tag: "progess"
+---
+
+Other than the model code & simulation parts, data is also needed to proceed. I had gone through the docs & boiled down
+the exact endpoints to consider, so I tested them. It took longer than I expected, had to juggle between their endpoint docs, 
+their pages about format explainations, google maps for the coordinates, and a visualisation tool for long lists of coordinates.
+Some endpoints covered a certain distance before & after, some only before it, etc. 
+The 'traffic density service' didn't output density at all like I expected, only details about their own road coverage. 
+
+I am worried about having data only related to speed & travel time spent. TTS is the basis of evaluation, so only speed is left as input.
+I am worried about less data for the relatively complex architecture I'm trying out. But I guess that must be what research is all about,
+trying new things & reaching a conclusion, whether good or bad. My data might be simple, but has alot of variance.
+And I want to add speed predictions, as well as a parameter for incidents. That raises the complexity a slight bit.
+Neural networks did work for the main paper of reference. And the chosen architecture minimises complexity,
+by using a single feature exracter, and branching it into different outputs that will be used differently. 

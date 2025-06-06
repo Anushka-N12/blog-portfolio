@@ -34,6 +34,10 @@ I understand the concept of actor-critic to some extent, but don't fully know th
 
 # Code
 After coding the basic actor-critic & going through some theory, I started to modify my code according to an SAC tutorial. 
+Main changes included adding a 'replay buffer', that stores experiences as the agent does actions & observes results. 
+The tutorial showed seperate networks, but I will stick with one, due to straight-forward data. I chose NNs since it is dynamically changing, but also don't want to make it too complex.
+The SAC paper had more complex data, so I wanted my approach to be simpler, but carry the pros of the method.  
 
 # References
 - [Can a Random Reinforcement Learning Agent Maximize its Score? Soft Actor Critic (SAC) in Tensorflow2](https://www.youtube.com/watch?v=YKhkTOU0l20)
+- [Replay Memory Explained - Experience for Deep Q-Network Training](https://www.youtube.com/watch?v=Bcuj2fTH4_4)
