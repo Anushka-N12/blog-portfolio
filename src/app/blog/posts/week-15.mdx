@@ -1,120 +1,41 @@
 ---
-title: "Week #15 - Completing Model Design"
+title: "Week #15 - Concluding Data Problem"
 publishedAt: "2025-05-04"
-summary: "Completing Model Design"
-tag: "progess"
+summary: "Concluding Data Problem"
+tag: "progress"
 ---
 
-Last time I focused on a general actor-critic design. This time, I added modifications & new parts
-while referring to an SAC video. Fixed issues with previous code - divided outputs into separate functions,
-since learning for each is different. 
+## The Missing Density Metric
 
-Replay buffer keeps track of episodes - their initial states, output & result. Code below: 
+The Vector Flow Tiles endpoint is where I wanted to get a density-like value from.
+It's the value that makes roads look blue/yellow/red on maps, a percentage to show congestion/overhead on capacity.
 
-<CodeBlock className="my-24"
-    compact={false}
-    codeInstances={[
-        {
-            code: `import numpy as np
+- The endpoint returned **no outputs** for my coordinates
+- This was problematic because even the simpler 2010 reference model used this metric
 
-class ReplayBuffer:
-    def __init__(self, max_size, input_shape): #, n_actions
-        self.mem_size = max_size
-        self.mem_cntr = 0
-        self.state_mem = np.zeros((self.mem_size, *input_shape))
-        self.n_state_mem = np.zeros((self.mem_size, *input_shape))
-        self.action_mem = np.zeros((self.mem_size))  #, n_actions
-        self.reward_mem = np.zeros(self.mem_size)
-        self.terminal_mem = np.zeros(self.mem_size, dtype=bool)
-    
-    def store_transition(self, state, action, reward, n_state, done):
-        index = self.mem_cntr % self.mem_size
-        self.state_mem[index] = state
-        self.n_state_mem[index] = n_state
-        self.reward_mem[index] = reward
-        self.action_mem[index] = action
-        self.terminal_mem[index] = done
-        self.mem_cntr += 1
-    
-    def sample_buffer(self, batch_size):
-        max_mem = min(self.mem_cntr, self.mem_size)
-        batch = np.random.choice(max_mem, batch_size)
-        states = self.state_mem[batch]
-        n_states = self.n_state_mem[batch]
-        actions = self.action_mem[batch]
-        rewards = self.reward_mem[batch]
-        dones = self.terminal_mem[batch]
-        return states, actions, rewards, states, dones`,
-            label: 'replay_buffer.py',
-            language: 'python',
-            showLineNumbers: true
-        },
-    ]}
-    copyButton
-    maxHeight="400px"
-/>
+---
 
+## The Provider Hunt
 
-Below code is for the main learning function, addressing each part individually:
+### Failed Attempts:
+- **Google Maps**: Only offered JavaScript plugins for map apps, no direct data extraction
 
-<CodeBlock className="my-24"
-    compact={false}
-    codeInstances={[
-        {
-            code: `def learn(self):
-        if self.memory.mem_cntr < self.batch_size:
-            return
+### The Azure Discovery:
+Finally found **Azure Traffic APIs** - but the first test was rough, the output was absolute nonsense coordinates.
 
-        # 1. Sample a batch
-        state, action, reward, next_state, done = self.memory.sample_buffer(self.batch_size)
+I understood that I has to be my calculations or formatting, 
+since it is a trusted cloud service. After lots of trials, it turned out that -
+TomTom had straightforward functions, to convert lat/long to x/y tile values, with reference to given zoom value.
+But Azure was also influeenced by an 'extent' value, that changed the dimensions of the tile,
+from the default 256x256 to 4096. This was for precision purposes. So when we got back x,y values,
+they needed to be scaled down to 256 before converting from tile xy to lat/long again. 
 
-        state = tf.convert_to_tensor(state, dtype=tf.float32)
-        next_state = tf.convert_to_tensor(next_state, dtype=tf.float32)
-        reward = tf.convert_to_tensor(reward, dtype=tf.float32)
-        action = tf.convert_to_tensor(action, dtype=tf.float32)
-        done = tf.convert_to_tensor(done, dtype=tf.float32)
+## Resolution and Moving Forward
 
-        # Update Value Network 
-        with tf.GradientTape() as tape:
-            value = tf.squeeze(self.ac.get_value(state), 1)
+After working through these issues:
+- I finally got the traffic density values I needed
+- Verified all other endpoints (speeds, travel time, incidents) are working correctly
+- Decided to stick with Azure for all data needs to maintain consistency
+- Learned that sometimes you have to dig deep into documentation quirks
 
-            # Sample from current policy
-            new_action, log_prob = self.ac.sample_normal(state)
-            q_value = tf.squeeze(self.ac.get_q(tf.concat([state, new_action], axis=1)), 1)
-
-            # Target: Q - log_pi
-            value_target = q_value - tf.squeeze(log_prob, 1)
-            value_loss = 0.5 * tf.keras.losses.MSE(value, value_target)
-
-        value_grads = tape.gradient(value_loss, self.ac.trainable_variables)
-        self.ac.optimizer.apply_gradients(zip(value_grads, self.ac.trainable_variables))
-
-        # Update Actor Network
-        with tf.GradientTape() as tape:
-            new_action, log_prob = self.ac.sample_normal(state)
-            q_value = tf.squeeze(self.ac.get_q(tf.concat([state, new_action], axis=1)), 1)
-
-            actor_loss = tf.reduce_mean(log_prob - q_value)
-
-        actor_grads = tape.gradient(actor_loss, self.ac.trainable_variables)
-        self.ac.optimizer.apply_gradients(zip(actor_grads, self.ac.trainable_variables))
-
-        # Update Critic / Q-function
-        with tf.GradientTape() as tape:
-            # Compute Q target: reward + γ * V(next_state)
-            value_ = tf.squeeze(self.ac.get_value(next_state), 1)
-            q_target = reward + self.gamma * value_ * (1 - done)
-
-            q_pred = tf.squeeze(self.ac.get_q(tf.concat([state, action], axis=1)), 1)
-            critic_loss = 0.5 * tf.keras.losses.MSE(q_pred, q_target)
-
-        critic_grads = tape.gradient(critic_loss, self.ac.trainable_variables)
-        self.ac.optimizer.apply_gradients(zip(critic_grads, self.ac.trainable_variables))`,
-            label: 'agent.py',
-            language: 'python',
-            showLineNumbers: true
-        },
-    ]}
-    copyButton
-    maxHeight="400px"
-/>
+While this debugging process took some time, now I've got finally reliable data flowing through the pipeline.
