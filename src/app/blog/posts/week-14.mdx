@@ -2,18 +2,58 @@
 title: "Week #14 - Data"
 publishedAt: "2025-04-27"
 summary: "Data Collection"
-tag: "progess"
+tag: "progress"
 ---
 
-Other than the model code & simulation parts, data is also needed to proceed. I had gone through the docs & boiled down
-the exact endpoints to consider, so I tested them. It took longer than I expected, had to juggle between their endpoint docs, 
-their pages about format explainations, google maps for the coordinates, and a visualisation tool for long lists of coordinates.
-Some endpoints covered a certain distance before & after, some only before it, etc. 
-The 'traffic density service' didn't output density at all like I expected, only details about their own road coverage. 
+## The Data Hunt
 
-I am worried about having data only related to speed & travel time spent. TTS is the basis of evaluation, so only speed is left as input.
-I am worried about less data for the relatively complex architecture I'm trying out. But I guess that must be what research is all about,
-trying new things & reaching a conclusion, whether good or bad. My data might be simple, but has alot of variance.
-And I want to add speed predictions, as well as a parameter for incidents. That raises the complexity a slight bit.
-Neural networks did work for the main paper of reference. And the chosen architecture minimises complexity,
-by using a single feature exracter, and branching it into different outputs that will be used differently. 
+Beyond the model code and simulation work, I've been wrestling with **data collection** - and it's been taking longer than I expected.
+Some endpoints covered a certain distance before & after given coordinates, some only before it, etc. 
+
+### API Endpoint Exploration
+- Went through detailed documentation to identify relevant endpoints
+- Tested each one extensively
+- Had to constantly switch between:
+  - Endpoint documentation
+  - Format specification pages
+  - Google Maps (for coordinate verification)
+  - Visualization tools (for making sense of long coordinate lists)
+
+**Unexpected Discovery:**  
+The so-called "traffic density service" didn't actually provide density metrics - just details about their road coverage. Not what I needed at all.
+
+---
+
+## Data Limitations Concerns
+
+### Current Data Reality:
+- **Primary Metrics Available:**
+  - Speed data
+  - Travel time spent (TTS)
+
+### My Worries:
+1. TTS is already my evaluation metric, which leaves only **speed data as input**
+2. My architecture is relatively complex for such simple input data
+3. Concerned about whether this will actually result in a better model
+
+### Silver Linings:
+- While the data is simple, it has **significant variance** 
+- Planning to enhance with:
+  - Speed predictions
+  - Incident parameters
+- The reference paper succeeded with neural networks on similar data
+- My architecture actually **minimizes complexity** by:
+  - Using a single feature extractor
+  - Branching into different specialized outputs
+
+---
+
+## Research Reality Check
+
+This process has reminded me what research is really about:
+- Trying new approaches
+- Working with imperfect information
+- Reaching conclusions (whether positive or negative)
+- Pushing forward even when things don't match initial expectations
+
+The road ahead might be uncertain, but that's part of the journey.

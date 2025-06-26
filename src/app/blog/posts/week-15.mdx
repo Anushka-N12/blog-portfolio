@@ -1,0 +1,41 @@
+---
+title: "Week #15 - Concluding Data Problem"
+publishedAt: "2025-05-04"
+summary: "Concluding Data Problem"
+tag: "progress"
+---
+
+## The Missing Density Metric
+
+The Vector Flow Tiles endpoint is where I wanted to get a density-like value from.
+It's the value that makes roads look blue/yellow/red on maps, a percentage to show congestion/overhead on capacity.
+
+- The endpoint returned **no outputs** for my coordinates
+- This was problematic because even the simpler 2010 reference model used this metric
+
+---
+
+## The Provider Hunt
+
+### Failed Attempts:
+- **Google Maps**: Only offered JavaScript plugins for map apps, no direct data extraction
+
+### The Azure Discovery:
+Finally found **Azure Traffic APIs** - but the first test was rough, the output was absolute nonsense coordinates.
+
+I understood that I has to be my calculations or formatting, 
+since it is a trusted cloud service. After lots of trials, it turned out that -
+TomTom had straightforward functions, to convert lat/long to x/y tile values, with reference to given zoom value.
+But Azure was also influeenced by an 'extent' value, that changed the dimensions of the tile,
+from the default 256x256 to 4096. This was for precision purposes. So when we got back x,y values,
+they needed to be scaled down to 256 before converting from tile xy to lat/long again. 
+
+## Resolution and Moving Forward
+
+After working through these issues:
+- I finally got the traffic density values I needed
+- Verified all other endpoints (speeds, travel time, incidents) are working correctly
+- Decided to stick with Azure for all data needs to maintain consistency
+- Learned that sometimes you have to dig deep into documentation quirks
+
+While this debugging process took some time, now I've got finally reliable data flowing through the pipeline.
