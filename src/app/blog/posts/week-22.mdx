@@ -28,12 +28,12 @@ I had speed data from highway sensors - but only for **1-2 weeks**. Most ML tuto
 
 ## Models I Tried (Spoiler: KNN Won)
 
-| Model | Why I Tried It | Why It Didn't Win |
-|--------|----------------|-------------------|
-| Time-Average | Simple baseline using hourly patterns | Too rigid for minute-by-minute changes |
-| Last-Value | "What if we just repeat yesterday?" | Failed during traffic anomalies |  
-| Random Forest | Usually my go-to for tabular data | Overfit the tiny dataset |
-| **KNN** | Finds similar historical moments | Actually worked best! |
+| Model          | Why I Tried It                             | Why It Didn't Win                          |
+|----------------|--------------------------------------------|--------------------------------------------|
+| Time-Average   | Simple baseline using hourly patterns      | Too rigid for minute-by-minute changes     |
+| Last-Value     | "What if we just repeat yesterday?"        | Failed during traffic anomalies            |
+| Random Forest  | Usually my go-to for tabular data          | Overfit the tiny dataset                   |
+| **KNN**        | Finds similar historical moments           | Actually worked best!                      |
 
 ---
 
