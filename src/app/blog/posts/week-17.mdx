@@ -1,8 +1,138 @@
 ---
-title: "Week #17 - Formatting Data"
+title: "Week #17 - Formatting Data & Setup in GCP"
 publishedAt: "2025-05-18"
-summary: "Formatting Data"
+summary: "Formatting Data Setup in GCP"
 tag: "progress"
 ---
 
-mention internship & routine
+I joint an internship this month, so have been trying to organise my time accordingly, haven't been able to 
+active work on the project for a few weeks. But will get back soon. 
+
+## Cloud Data Pipeline Implementation
+
+### Architecture Overview
+- **GCP Cloud Functions**: Hosted the data collection scripts
+- **Cloud Scheduler**: Automated daily data collection
+- **Google Sheets**: Served as temporary data warehouse
+- **Pandas**: Processed and analyzed the collected data
+
+### Collection Details
+1. Started with **one test segment** to validate the pipeline
+2. Expanded to **3 key segments** across different areas
+3. Final setup collects:
+   - Speed data
+   - Travel times
+   - Incident reports
+
+The script is quite big to view here, so here's a summary:
+
+### Key Functions
+- get_flow_segment_data(): Fetches speed/travel time data
+- get_incident_details(): Gets incident reports for areas
+- get_traffic_flow_for_bbox_and_filter(): Master function for Azure Maps data
+- lat_lon_to_tile()/pixel_to_lat_lon(): Coordinate conversion helpers
+
+### Error Handling
+- Multiple API key fallbacks (TOMTOM_KEY, TOMTOM_KEY2, TOMTOM_KEY3)
+- Comprehensive try-catch blocks for API failures
+- Error state preservation in output data
+
+### Deployment
+- Designed as Google Cloud Function
+- Triggered via HTTP requests (e.g., from Cloud Scheduler)
+- Uses Google's default service account for Sheets access
+
+## Data Analysis & Visualization
+
+### Key Visualizations Created
+
+Speed Patterns:
+- Morning vs evening peaks
+- Weekday vs weekend comparisons
+- Nearby segments together to observe variation
+
+- Comaprison with incident pattern
+- Comaprison with TTS pattern
+
+Focuses analysis on peak traffic hours:
+- Morning: 5-9 AM
+- Evening: 4-8 PM
+
+Other additions:
+- Temporal features for deeper analysis (day_of_week, weekday/weekend, etc.)
+
+Example code of one part:
+
+<CodeBlock className="my-24"
+    compact={false}
+    codeInstances={[
+        {
+            code: `# Load Excel data
+df = pd.read_excel('final_vsl_data.xlsx')[1:]
+
+# Clean and split speed data columns
+df['Mcity_S1'] = df['Mcity_CurrentSpeed'].str.split(',').str[0]
+df['Mcity_S2'] = df['Mcity_CurrentSpeed'].str.split(',').str[1]
+df['Mcity_S3'] = df['Mcity_CurrentSpeed'].str.split(',').str[2]
+
+# Filter out error rows
+df = df[df['Mcity_S1'] != 'Error']
+
+morning_window = ('05:00', '09:00')
+evening_window = ('16:00', '20:00')
+
+time_condition = (
+    df['Timestamp'].dt.time.between(morning_window) |
+    df['Timestamp'].dt.time.between(evening_window)
+)
+df = df[time_condition].copy()
+
+df['hour'] = df['Timestamp'].dt.hour
+df['minute'] = df['Timestamp'].dt.minute
+df['day_of_week'] = df['Timestamp'].dt.dayofweek  # Monday=0
+df['is_weekend'] = df['day_of_week'].isin([5,6]).astype(int)
+df['date'] = df['Timestamp'].dt.date`,
+            label: 'data_processing.py',
+            language: 'python',
+            showLineNumbers: true
+        },
+    ]}
+    copyButton
+    maxHeight="400px"
+/>
+
+## Analysis Locations:
+
+1. Motor City (Mcity)
+- 3 segments (S1, S2, S3)
+- Comprehensive speed data
+
+2. Deira
+- 2 segments (S1, S2)
+- Required additional string processing
+
+3. Mohammed Bin Zayed Road (Mohd)
+- 3 segments
+- Most complex data cleaning requirements
+
+### Insights Generated
+- Clear patterns of speed reduction during peak hours
+- Weekend vs weekday traffic differences
+- Segment-specific congestion patterns
+
+## Future Enhancements
+- Automated anomaly detection
+- Integration with weather data
+- Predictive modeling for traffic speeds
+- Interactive dashboard version
+
+## Next Steps
+
+### Simulation Integration:
+- Feed real patterns into the simulation model
+- Calibrate based on observed behaviors
+
+### Model Refinement:
+- Adjust RL rewards based on empirical delay patterns
+
+The automated pipeline is now reliably collecting the data needed for both training and validating our models.

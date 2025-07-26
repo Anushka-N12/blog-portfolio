@@ -1,6 +1,50 @@
 ---
-title: "Week #18 - Setup in GCP"
+title: "Week #18 - Setup simulation environment"
 publishedAt: "2025-05-25"
-summary: "Setting up data collection automation on GCP"
+summary: "simulation script"
 tag: "progress"
 ---
+
+This week, I finally got started on actually building the VSL simulation system using the MetaNet framework (a macroscopic traffic modeling tool). 
+It was messy at first — lots of random TypeErrors, missing inputs, and figuring out what’s what — but I’m starting to get a better grasp of how everything connects.
+
+## Goals:
+- Create a simulation class to represent a real stretch of highway in my city
+- Use MetaNet’s structure (Nodes, Links, Ramps) to define the network
+- Try to keep it close to the working example first before making it custom
+
+### What I figured out:
+- Network setup starts from Nodes and Links, then adds Origins, Destinations, and Paths. The example script did this really cleanly, so I copied the pattern and adjusted the road segments to match my actual layout.
+- MetaNet is super picky about ordering and uniqueness in node names, ramp demands, and route paths. I kept getting duplicate node/path errors until I cleaned things up.
+- Each Link has length, number of segments, and type (Link, LinkWithVsl, Ramp), and ramps need their own demands too.
+
+Originally I thought I'd just use the center segment of the road for VSL, but turns out changing speed limits too often on short segments makes no real-world sense — I’ll apply a single VSL across all 3 segments to make it practical.
+
+## How I built the base network:
+Here’s the rough flow I followed to define the road network structure using MetaNet:
+
+- Created main highway link (L1) using LinkWithVsl, with:
+    - Total length of ~4.5 km
+    - Split into 3 segments
+    - 4 lanes total
+
+- Added on-ramps (R1, R2, etc.) using the Ramp class, each connected to different points along the main link
+- Defined nodes (N0, N1, ...) to serve as junctions between links and ramps
+
+- Connected everything using:
+    - add_link(link, up_node, down_node) to define topology
+    - add_origin() and add_destination() to specify entry/exit points
+    - add_path() to define vehicle routing paths from origin to destination
+    - Created a Network instance to wrap all of the above together
+    - Verified that each ramp had its own demand model so it injects vehicles properly into the simulation
+
+This structure mirrored a real 3-segment stretch of road I had data for. Initially, I was getting tons of weird errors (like “missing arguments” or “duplicated node”) until I carefully followed the ordering used in the example.
+
+Hiccups:
+- I used add_link() in the wrong way for a while before realizing I was missing the arguments.
+- The environment wasn't resetting properly because I wasn’t calling reset() or storing states right — fixed that after digging into the example.
+- Speed limits were initially not affecting the simulation because I forgot to apply v_limit as part of the input action.
+
+Win of the week:
+I finally got a running simulation with a dummy agent applying random VSLs, and the traffic flow & density started reacting to it! Super motivating to see some dynamic behavior on the plots.
+

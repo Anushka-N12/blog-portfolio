@@ -1,15 +1,49 @@
 ---
 title: "Week #19 - Connecting to METANET"
 publishedAt: "2025-06-01"
-summary: "Connecting to METANET"
+summary: "Identifying cause of flat learning curve"
 tag: "progress"
 ---
 
-....
+Welcome back to the VSL project dev blog! This post covers the early days of getting the model up and running — when nothing worked, shapes yelled at me, and reward curves were flatter than a desert highway. 😅
+This week, the main goal was to plug the SAC model & the simulation environment together & start training. 
 
-A58: A highway in Netherlands where variable speed limits are implemented with 5-minute control intervals (300 seconds)
-Kolmogorov-Smirnov: Statistical test comparing distributions
+## First Errors: Shape Mismatches Everywhere
+- CasADi states had different shapes from TensorFlow tensors
+- Actions were being passed in as scalars when the model expected vectors
+- Rewards didn’t make sense (turns out they weren’t being scaled properly)
+- Even my state construction (e.g., flattening segment speeds, VSLs) had misalignments
 
-Pending:
-Tune hyperparameters based on initial runs
-Add logging and visualization to monitor performance
+A lot of the fixes came down to:
+
+<CodeBlock className="my-24"
+    compact={false}
+    codeInstances={[
+        {
+            code: `np.array(...).flatten()
+tf.convert_to_tensor(...)
+reshape(-1, 1)`,
+            label: 'train.py',
+            language: 'python',
+            showLineNumbers: true
+        },
+    ]}
+    copyButton
+    maxHeight="400px"
+/>
+...and a lot of print-debugging!
+
+## The Flat Reward Curve
+Once things ran, I hit another issue: the reward curve was basically a flat line. Agent wasn’t learning anything. A few potential causes:
+- Too sparse or noisy rewards (only small changes every step)
+- Too short episode length
+- Wrong scaling (I was giving raw -TTS as reward instead of -tanh() or 1/tts)
+- Actions not affecting the sim enough — like setting VSLs but traffic wasn’t reacting much
+
+To begin with, I played around with the scaling. The values did change, NaN errors stopped, but there's alot more to go.
+There is still alot I need to wrap my head around when it comes to RL systems. There is so much content I haven't gone through yet, 
+looking forwardto learn about it as I tried things to fix this. 
+
+## Pending:
+- Tune hyperparameters based on initial runs
+- Add logging and visualization to monitor performance
