@@ -92,6 +92,15 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
+        company: "Sony Middle East & Africa",
+        timeframe: "May 2025 - July 2025",
+        role: "Business Systems Support Intern",
+        achievements: [
+          "Developing automation workflows to reduce manual work & coordination in internal processes."
+        ],
+        images: [],
+      },
+      {
         company: "Headstarter AI",
         timeframe: "July 2024 - Sept 2024",
         role: "Software Engineering Fellow",
@@ -240,7 +249,7 @@ const gallery = {
     {
       src: "/images/gallery/img-06.jpg",
       alt: "image",
-      orientation: "vertical",
+      orientation: "horizontal",
     },
     {
       src: "/images/gallery/img-07.jpg",
