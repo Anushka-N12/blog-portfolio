@@ -1,10 +1,74 @@
 ---
-title: "Week #24 - WCSAC"
+title: "Week #23 – WCSAC & Risk-Aware Reinforcement Learning"
 publishedAt: "2025-07-06"
-summary: "WCSAC"
+summary: "Adding risk sensitivity to SAC using a safety critic, deceleration-based cost signals, and CVaR loss."
 tag: "progress"
 ---
 
-rechecks, organising, wcsac addition
+This week, we finally brought in **Worst-Case Soft Actor-Critic (WCSAC)** and gave our agent some risk-awareness. 🚧
 
-writing in progress....
+### What is WCSAC?
+
+At a high level, it builds on regular SAC but adds:
+- A separate **safety critic** that learns which actions could be risky.
+- A **safety reward** signal based on deceleration events (sharp speed drops).
+- A **CVaR-based loss** to make the agent focus more on bad outcomes (worst-case scenarios).
+- A **lambda coefficient** that balances regular performance and safety, and is adjusted during training.
+
+This lets the agent still aim for good performance, but **avoid risky decisions**.
+
+---
+
+###  Key Additions This Week
+
+#### Safety Critic
+
+We added a new Q-network (`Q_safety`) with its own optimizer. It’s trained just like a regular critic, but instead of using traffic efficiency rewards, it learns from a **safety reward** signal.
+
+Snippet:
+
+<CodeBlock className="my-24"
+    compact={false}
+    codeInstances={[
+        {
+            code: `q_safety_pred = self.ac.get_safety_q(tf.concat([states, actions], axis=1))
+safety_loss = 0.5 * tf.reduce_mean((q_safety_pred - safety_rewards) ** 2)
+`,
+            label: 'train.py',
+            language: 'python',
+            showLineNumbers: true
+        },
+    ]}
+    copyButton
+    maxHeight="400px"
+/>
+
+### Safety Reward = Speed Drop
+Our safety signal is simple but effective:
+If the speed drops suddenly between two segments (say S2 to S3), we flag that as risky.
+Based on that, we generate a reward of 1 (risky) or 0 (safe).
+
+### Adaptive Lambda
+We track how many risky actions the agent is taking and adapt lambda_safety accordingly:
+
+<CodeBlock className="my-24"
+    compact={false}
+    codeInstances={[
+        {
+            code: `if too_many_unsafe_actions:
+    lambda_safety += 0.01
+else:
+    lambda_safety -= 0.01
+lambda_safety = np.clip(lambda_safety, 0.1, 10)`,
+            label: 'train.py',
+            language: 'python',
+            showLineNumbers: true
+        },
+    ]}
+    copyButton
+    maxHeight="400px"
+/>
+
+---
+
+We still need to tune thresholds and CVaR α a bit more, but the structure is working!

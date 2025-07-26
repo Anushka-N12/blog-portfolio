@@ -1,10 +1,40 @@
 ---
-title: "Week #25 - Documentation"
+title: "Week #25 – Docs, Wrap-Up & Looking Back"
 publishedAt: "2025-07-13"
-summary: ""
+summary: "Final week dedicated to documenting the full project – from architecture to training flow, and all design choices."
 tag: "progress"
 ---
 
-documentation
+Final week! No new features or bugs (for once) – just sitting down to put everything into words.
 
-writing in progress....
+---
+
+### Documentation Week
+
+I spent this week fleshing out the full dev documentation and report. Most of it was already floating around in code comments, scratch notes, or in my head — just not organized properly.
+
+What got done:
+
+-  **Environment Design**: Explained how the macroscopic MetaNet model works, what links and nodes represent, and how we modeled UAE roads in segments.
+-  **State Construction**: Wrote out the logic behind each input state element (current/prev VSL, speeds, predictions, incident flag).
+-  **Reward Structure**: Documented all reward variations we tried — from TTS to speed bonuses and transformations.
+-  **SAC + WCSAC Logic**: Detailed all loss terms (actor, critic, safety critic, entropy, CVaR), when each kicks in, and how they interact.
+-  **Training Loop**: Walked through the full loop — action choosing, reward aggregation every 30 steps, learning cycle, and evaluation.
+-  **Experimental Notes**: Jotted down lessons from flat rewards, shape bugs, NaN debugging, and critic instability.
+-  **Figures**: Captured key plots: learning curve, average segment speeds, and VSL decisions over time.
+
+---
+
+### The Writing Process
+
+It’s funny — thinking about all the effort that went into designing each part made writing it way easier. The hard part wasn’t explaining… it was remembering everything we tried!
+
+Also wrote some blog posts (this one included), cleaned up the README, and polished the portfolio entry.
+
+---
+
+### What’s Next?
+
+Just pushing everything to GitHub, finalizing the presentation deck, and I’m DONE. Might revisit this in the future to build a dashboard or real-time demo — who knows?
+
+But for now… we’re wrapped!

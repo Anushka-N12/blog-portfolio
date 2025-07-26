@@ -1,11 +1,43 @@
 ---
-title: "Week #23 - Fine-tuning Model"
+title: "Week #23 – Fine-Tuning & Integration & Smarter States"
 publishedAt: "2025-06-29"
-summary: ""
+summary: "Refining the SAC agent: dual Q-networks, realistic rewards, and meaningful state inputs."
 tag: "progress"
 ---
 
-Integrated tests
-states
+This week was about tightening everything up and making sure the SAC agent was running on a *fully-formed* setup — proper inputs, correct reward flow, and stable learning.
 
-writing in progress....
+### Two Q-Networks = More Stability
+
+Earlier, we had issues with unstable learning curves — one major reason was only relying on a single Q-network or forgetting to use both for min-Q during actor updates. Restoring the dual critic setup made training a lot more reliable and robust.
+
+### Smarter Rewards
+
+Another big improvement was reworking the reward system:
+- Initially, the environment returned **synthetic or unscaled values**, which weren’t very informative.
+- We updated it to calculate **Total Time Spent (TTS)** using densities and ramp queues, and transformed it to be:
+  - Negative of time (to minimize)
+  - Scaled to avoid vanishing gradients
+- This helped the agent better associate actions with meaningful traffic outcomes.
+
+### Evolving the State
+
+Our state vector used to be super minimal — just current speed and density. Not enough context.
+
+Now it includes:
+- **Current & previous VSLs** (normalized)
+- **Current & previous segment speeds**
+- **Predicted future speed** (via a simple KNN model)
+- **Synthetic incident indicator**
+
+This makes the agent more informed and helps avoid short-sighted decisions.
+
+### Full Test Runs
+
+Ran full episodes with the updated SAC setup. Speeds across episodes started showing smoother transitions and fewer weird spikes. Also added detailed printouts during training to track changes in VSL, rewards, and state values.
+
+### What’s Next
+
+Next week is **WCSAC week** — we’ll plug in the safety critic, introduce CVaR-based updates, and adapt our training for risk-sensitive traffic control. Expect things to get interesting!
+
+---
