@@ -28,14 +28,21 @@ I had speed data from highway sensors - but only for **1-2 weeks**. Most ML tuto
 
 ## Models I Tried (Spoiler: KNN Won)
 
-| Model          | Why I Tried It                             | Why It Didn't Win                          |
-|----------------|--------------------------------------------|--------------------------------------------|
-| Time-Average   | Simple baseline using hourly patterns      | Too rigid for minute-by-minute changes     |
-| Last-Value     | "What if we just repeat yesterday?"        | Failed during traffic anomalies            |
-| Random Forest  | Usually my go-to for tabular data          | Overfit the tiny dataset                   |
-| **KNN**        | Finds similar historical moments           | Actually worked best!                      |
+1. Time-Average
+- I used this as a simple baseline — just averaged speeds based on the hour of day.
+- It didn’t hold up when speeds changed minute by minute. Way too stiff for real-time prediction.
 
----
+2. Last-Value
+- The logic here was “what if we just repeat yesterday’s value at this time?”
+- But it couldn’t capture short-term shifts or time-of-day effects. Ended up too lazy for anything dynamic.
+
+3. Random Forest
+- My usual go-to for tabular data since it handles non-linear stuff well.
+- But with such a tiny dataset, it would overfit everything and not generalize at all.
+
+4. KNN (Winner!)
+- Looked at similar historical moments and used them to make predictions.
+- Surprisingly solid! It just worked with the limited data I had and didn't need training.
 
 ## The Secret Sauce: Time Features That Don't Suck
 
@@ -64,14 +71,13 @@ df['hour_cos'] = np.cos(2 * np.pi * df['hour']/24)`,
 
 ### The "Good Enough" Results
 
-| Model | MAE (km/h) | 
-|--------|----------------|
-| Time-Average | 5.78 |
-| Last-Value | 14.47 |
-| Random Forest | 10.17 |
-| KNN | 7.88 |
+-  Time-Average --> 5.78 
+- Last-Value --> 14.47 
+- Random Forest --> 10.17 
+- KNN --> 7.88 
 
-Not perfect, but decent for 6 days of data!
+KNN did better if we take the average performance in multiple tests. 
+Not perfect, but decent for a week of data!
 
 ## Dashboard
 
