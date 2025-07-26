@@ -1,0 +1,32 @@
+---
+title: "Week #21 - Revisiting Concepts & Validation"
+publishedAt: "2025-06-15"
+summary: "Validation & clean-up & prep for final phase"
+tag: "progress"
+---
+
+Not much action this week — having to make hospital visits lately, due to a situation in the family, and couldn’t make big pushes.
+
+That said, I did get a few important things done:
+
+## Debugging & Cleanup
+
+Spent some time debugging minor issues in the environment. There were a few leftover inconsistencies (state construction, reward NaNs, unexpected action shapes) that I cleaned up.
+Also added better print statements during training (like VSL values, reward, segment speeds), which helps keep an eye on what’s actually happening during runs.
+
+## Revisiting Equations
+
+Went back to the theory behind the RL models and refreshed the Bellman equation, Soft Q-functions, entropy tuning, and the CVaR idea from WCSAC. This was mostly for writing the report and making sure I could explain everything — not just code it blidnly from tutorials or repos. Might do a future post summarizing all of that cleanly.
+
+## Verifying Components
+
+Did some manual tests to verify things like:
+- reward shaping is behaving as expected
+- entropy and lambda values actually update in training
+
+These checks are boring but necessary. Hoping they help smooth things out as I move into the final training + demo prep phase.
+
+---
+
+Not a flashy week, but an important one.
+Back soon with model results and final tweaks!

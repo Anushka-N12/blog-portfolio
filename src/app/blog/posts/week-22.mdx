@@ -1,0 +1,82 @@
+---
+title: "Week #22 - Speed Prediction & Dashboard"
+publishedAt: "2025-06-22"
+summary: "Speed Prediction & Dashboard"
+tag: "progress"
+---
+
+I had multiple goals for this week:
+- Speed Prediction Model
+- Dashboard Development
+- Adding predictions & other inputs to state vector
+
+# Building a Traffic Speed Predictor with Little Data
+*How I hacked together a decent traffic speed model when I barely had any data*
+
+---
+
+## The Problem: Predicting Traffic with Almost No History
+
+I had speed data from highway sensors - but only for **1-2 weeks**. Most ML tutorials assume you have months of clean data. Reality check: **real-world data is messy and limited**.
+
+**My constraints:**
+- Only 5-9 AM and 4-8 PM data (peak hours)
+- Some responses randomly returned "Error" 
+- Timestamps weren't perfectly aligned
+
+---
+
+## Models I Tried (Spoiler: KNN Won)
+
+| Model | Why I Tried It | Why It Didn't Win |
+|--------|----------------|-------------------|
+| Time-Average | Simple baseline using hourly patterns | Too rigid for minute-by-minute changes |
+| Last-Value | "What if we just repeat yesterday?" | Failed during traffic anomalies |  
+| Random Forest | Usually my go-to for tabular data | Overfit the tiny dataset |
+| **KNN** | Finds similar historical moments | Actually worked best! |
+
+---
+
+## The Secret Sauce: Time Features That Don't Suck
+
+Normal time features break at midnight (23:59 and 00:01 are "far apart"). Fixed it with:
+
+<CodeBlock className="my-24"
+    compact={false}
+    codeInstances={[
+        {
+            code: `df['hour_sin'] = np.sin(2 * np.pi * df['hour']/24)
+df['hour_cos'] = np.cos(2 * np.pi * df['hour']/24)`,
+            label: 'train.py',
+            language: 'python',
+            showLineNumbers: true
+        },
+    ]}
+    copyButton
+    maxHeight="400px"
+/>
+
+## Why KNN Was the Dark Horse Winner
+- No training needed - Just memorizes patterns (perfect for small data)
+- Local thinking - Predicts based on most similar historical moments
+- Handles uneven times - 8:03 prediction uses nearby 8:00 and 8:05 data
+- Pro move: Used distance-weighted voting so closer times matter more.
+
+### The "Good Enough" Results
+
+| Model | MAE (km/h) | 
+|--------|----------------|
+| Time-Average | 5.78 |
+| Last-Value | 14.47 |
+| Random Forest | 10.17 |
+| KNN | 7.88 |
+
+Not perfect, but decent for 6 days of data!
+
+## Dashboard
+
+This was done in a jiffy! Plain HTML, CSS, JS. Integrated maps in a few lines, added model call in a few lines, done!
+
+
+
+
