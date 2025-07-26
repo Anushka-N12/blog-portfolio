@@ -1,0 +1,40 @@
+---
+title: "Variable Speed Limits"
+publishedAt: "2025-07-25"
+summary: "Traffic Optimisation with Reinforcement Learning"
+images:
+  - "/images/projects/vsl.jpeg"
+link: "https://github.com/Anushka-N12/variable-speed-limits"
+---
+
+## Overview
+
+This project explores the use of reinforcement learning (RL) — specifically Soft Actor-Critic (SAC) and its safety-augmented variant WCSAC — to optimize Variable Speed Limits (VSL) on a real-world highway. The goal is to reduce congestion and improve traffic flow on urban roads by intelligently controlling speed limits using learned policies.
+
+The environment is based on the MetaNet macroscopic traffic model, which simulates real-world traffic dynamics. The agent observes segment-level traffic states (like speeds, queues, and VSL history) and learns to apply speed limits that reduce total vehicle time spent on the road. The model was trained and evaluated using real speed data from UAE highways.
+
+This was the first time SAC was adapted and tested in a macroscopic VSL setting for non-CAV (non-connected autonomous vehicle) traffic, demonstrating its potential in intelligent traffic systems.
+
+## Key Features
+
+- **Custom RL Environment**: Built a full gym-compatible environment from scratch to interface MetaNet with the agent. Included configurable segments, ramps, demand inflows, and VSL control logic.
+
+- **SAC & WCSAC Integration**: Implemented Soft Actor-Critic with entropy tuning and CVaR-based safety extensions (WCSAC). The agent learns to balance traffic flow efficiency and sudden speed drops.
+
+- **Real Data Integration**: Collected and processed speed data from UAE highways. Used it to generate demand inflow patterns and validate agent behavior under realistic conditions.
+
+- **Reporting & Interpretability**: Documented the entire RL pipeline (from agent setup to reward shaping) for transparency and reproducibility. Also wrote detailed blog posts covering model-building and debugging.
+
+## Technologies Used
+
+- **TensorFlow**: For implementing and training the SAC and WCSAC reinforcement learning agents.
+
+- **sym-metanet**: A symbolic implementation of the MetaNet macroscopic traffic model used for simulating multi-segment highways with ramp dynamics.
+
+- **Pandas & SciPy**: Used extensively for data processing, demand generation, and upsampling real-world speed measurements.
+
+- **Matplotlib**: For plotting training curves, segment speeds, and evaluation results to analyze model behavior over time.
+
+- **Google Cloud Platform (GCP)**: For automation API calls & storage, and hosting.
+
+- **Azure**: For accessing real-time traffic data
