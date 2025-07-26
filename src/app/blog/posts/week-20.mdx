@@ -1,0 +1,29 @@
+---
+title: "Week #20 - Tried custom enivronments"
+publishedAt: "2025-06-08"
+summary: "Modelling real roads"
+tag: "progress"
+---
+
+## Custom Network Setup: Trial & Error 
+After getting the example network to run, I started building my own environment class (MCityRoadEnv) to simulate a real highway stretch in my city. Here’s what that process looked like!
+
+### What I changed:
+- New class: Copied and renamed the existing environment script to MCityRoadEnv, then updated the __init__ and build_network() functions to reflect my real road.
+- Segment structure: I made L1 a LinkWithVsl with 3 segments (~1.5 km each), connected 3 on-ramps (R2, R3, R4) to it at different nodes.
+- Nodes and Links:
+    - Added more Node() objects to support my layout
+    - Connected links to nodes using add_link(), trying to match real road structure
+
+### What went wrong at first:
+- add_link() missing arguments: I forgot to include both the link and the two nodes in add_link(). You must define up_node and down_node clearly.
+- D1 already defined: I tried to define multiple destinations with the same name — had to use different destination names or restructure paths.
+- Demand issues: If you define a ramp but forget to add an origin with add_origin(), it just sits there doing nothing — no cars enter.
+- Path overlap errors: Accidentally made duplicate add_path() entries or skipped ramps in the path, causing vehicles to vanish midway.
+
+## Rules of the framework (or even generally) I'm learning on the way:
+- Always call add_origin() for each ramp or entry point.
+- You can reuse nodes, but destinations and paths need to be carefully tracked to avoid duplicates.
+- Use print statements or visualize node/link names to debug path logic.
+- When in doubt, simplify the network and add ramps/paths back one at a time.
+
